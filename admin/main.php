@@ -12,18 +12,18 @@ include ('template_top.php');
 ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr> 
+  <tr>
     <td height="15">&nbsp;</td>
   </tr>
-  <tr> 
-    <td> 
+  <tr>
+    <td>
       <div align="left"><b><font size="3">STRONA GLOWNA</font></b></div>
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td height="15">&nbsp;</td>
   </tr>
-  <tr> 
+  <tr>
     <td align="left">
 	<?php
 	if (isset($_SESSION['count'])) {
@@ -32,18 +32,18 @@ include ('template_top.php');
 else {
   $_SESSION['count'] = 1;
   }
-  
+
 print ('Zalogowany: ' . $_SESSION['username'] . ' (id: ' . $_SESSION['userid'] . ')<br>');
-print ('Ogladasz ta strone: ' . $_SESSION['count'] . ' raz.<br>');  
-	 $date = strtotime($_SESSION['lastlogin']); 
+print ('Ogladasz ta strone: ' . $_SESSION['count'] . ' raz.<br>');
+	 $date = strtotime($_SESSION['lastlogin']);
 	 $date = date('d-m-Y, H:i:s', $date);
 print ('Ostatni login: ' . $date . '<br>');
-print ('Logowales sie: ' . $_SESSION['timeslogedin'] . ' razy.' . '<br>'); 
+print ('Logowales sie: ' . $_SESSION['timesloggedin'] . ' razy.' . '<br>');
 ?>
 	</td>
   </tr>
 </table>
- 
-<?php  
+
+<?php
 include ('template_bottom.php');
 ?>

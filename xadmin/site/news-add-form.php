@@ -1,12 +1,7 @@
 <?php
 
 $smarty->assign('data_dodania', date('Y-m-d H:i:s'));
- 
 
-
-//*****************************************************************	
-$smarty->assign('mainsection', '<font color="#6f91ac">DODAWANIE NEWSA</font>');
-$smarty->assign('ctitle', 'DODAJ NEWS');
+$smarty->assign('mainsection', 'Dodaj newsa');
+$smarty->assign('ctitle', 'Dodaj newsa');
 $smarty->assign('body_template', 'site/news-add-form.tpl');
-//*****************************************************************
-?>

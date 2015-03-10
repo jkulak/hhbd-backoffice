@@ -23,5 +23,3 @@ $smarty->assign('lala_priv', $_SESSION['lala_priv']);
 include ('load-site.php');
 
 $smarty->display('admin.tpl');
-
-?>
