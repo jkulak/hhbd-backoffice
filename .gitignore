@@ -1,2 +1,4 @@
 *.ini
 templates_c/
+xadmin/vendor/
+admin/vendor/
