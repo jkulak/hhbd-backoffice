@@ -35,7 +35,7 @@ if ($result) {
     // Upload image and generate thumbnails
     if ('' != $tmpFile) {
         $path = $config['image_upload'];
-        $original = $path . 'news-original/' . $coverFileName;
+        $original = $path . '/news-original/' . $coverFileName;
 
         if (move_uploaded_file($tmpFile, $original)) {
             $smarty->assign('fileinfo', 'Skopiowano grafikę na serwer.');
