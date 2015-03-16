@@ -9,10 +9,11 @@ $userid = $_SESSION['adminuserid'];
 
 $news = mysql_real_escape_string($_POST['news']);
 $title = mysql_real_escape_string($_POST['title']);
-$artists = $_POST['artists'];
-$labels = $_POST['labels'];
-$albums = $_POST['albums'];
-$added = ($_POST['date'] == '') ? $_POST['date'] : date('Y-m-d H:i:s');
+
+$artists = isset($_POST['artists']) ? $_POST['artists'] : '';
+$labels = isset($_POST['labels']) ? $_POST['labels'] : '';
+$albums = isset($_POST['albums']) ? $_POST['albums'] : '';
+$added = isset($_POST['date']) ? $_POST['date'] : date('Y-m-d H:i:s');
 
 $tmpFile = $_FILES['graph']['tmp_name'];
 
