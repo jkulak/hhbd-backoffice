@@ -27,7 +27,6 @@ if ('' != $tmpFile) {
 
 // Add to the database
 $sql = 'INSERT INTO news (title, news, addedby, added, graph) VALUES ' . '("' . mysql_real_escape_string($title) . '", "' . mysql_real_escape_string($news) . '", "' . $userid . '", "' . $added . '", "' . $coverFileName . '")';
-print_r($sql);
 $result = mysql_query($sql);
 if ($result) {
     $smarty->assign('info', 'News został dodany do bazy.');
