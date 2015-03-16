@@ -15,7 +15,7 @@ $labels = isset($_POST['labels']) ? $_POST['labels'] : '';
 $albums = isset($_POST['albums']) ? $_POST['albums'] : '';
 $added = isset($_POST['date']) ? $_POST['date'] : date('Y-m-d H:i:s');
 
-$tmpFile = $_FILES['graph']['tmp_name'];
+$tmpFile = isset($_FILES['graph']['tmp_name']) ? $_FILES['graph']['tmp_name'] : '';
 
 // Generate image filename
 $coverFileName = '';
@@ -36,7 +36,7 @@ if ($result) {
     if ('' != $tmpFile) {
         $path = $config['image_upload'];
         $original = $path . 'news-original/' . $coverFileName;
-        print_r($original);
+        print_r($path);
 
         if (move_uploaded_file($tmpFile, $original)) {
             $smarty->assign('fileinfo', 'Skopiowano grafikę na serwer.');
