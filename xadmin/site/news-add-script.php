@@ -7,8 +7,8 @@ use Stringy\StaticStringy;
 
 $userid = $_SESSION['adminuserid'];
 
-$news = mysql_real_escape_string($_POST['news']);
-$title = mysql_real_escape_string($_POST['title']);
+$news = isset($_POST['news']) ? $_POST['news'] : '';
+$title = isset($_POST['title']) ? $_POST['title'] : '';
 
 $artists = isset($_POST['artists']) ? $_POST['artists'] : '';
 $labels = isset($_POST['labels']) ? $_POST['labels'] : '';
@@ -26,7 +26,7 @@ if ('' != $tmpFile) {
 }
 
 // Add to the database
-$sql = 'INSERT INTO news (title, news, addedby, added, graph) VALUES ' . '("' . $title . '", "' . $news . '", "' . $userid . '", "' . $added . '", "' . $coverFileName . '")';
+$sql = 'INSERT INTO news (title, news, addedby, added, graph) VALUES ' . '("' . mysql_real_escape_string($title) . '", "' . mysql_real_escape_string($news) . '", "' . $userid . '", "' . $added . '", "' . $coverFileName . '")';
 $result = mysql_query($sql);
 if ($result) {
     $smarty->assign('info', 'News został dodany do bazy.');
