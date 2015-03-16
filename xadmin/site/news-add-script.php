@@ -36,7 +36,6 @@ if ($result) {
     if ('' != $tmpFile) {
         $path = $config['image_upload'];
         $original = $path . 'news-original/' . $coverFileName;
-        print_r($path);
 
         if (move_uploaded_file($tmpFile, $original)) {
             $smarty->assign('fileinfo', 'Skopiowano grafikę na serwer.');
@@ -49,6 +48,10 @@ if ($result) {
             $positionX = 0; // px
             $positionY = 0; // px
             $position = 'MM';
+
+            echo '>>>';
+            print_r($path);
+            echo '<<<';
 
             $image = ImageWorkshop::initFromPath($original);
             $image->resizeInPixel(800, 800, $conserveProportion, $positionX, $positionY, $position);
