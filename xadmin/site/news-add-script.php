@@ -49,21 +49,17 @@ if ($result) {
             $positionY = 0; // px
             $position = 'MM';
 
-            echo '>>>';
-            print_r($path);
-            echo '<<<';
-
             $image = ImageWorkshop::initFromPath($original);
             $image->resizeInPixel(800, 800, $conserveProportion, $positionX, $positionY, $position);
-            $image->save($path, '/0news/' . $coverFileName, $createFolders, $backgroundColor, $imageQuality); //350
+            $image->save($path, 'news/' . $coverFileName, $createFolders, $backgroundColor, $imageQuality); //350
 
             $image = ImageWorkshop::initFromPath($original);
             $image->resizeInPixel(150, 150, $conserveProportion, $positionX, $positionY, $position);
-            $image->save($path, '/0news-thumbs/' . $coverFileName, $createFolders, $backgroundColor, $imageQuality); //148
+            $image->save($path, 'news-thumbs/' . $coverFileName, $createFolders, $backgroundColor, $imageQuality); //148
 
             $image = ImageWorkshop::initFromPath($original);
             $image->resizeInPixel(50, 50, $conserveProportion, $positionX, $positionY, $position);
-            $image->save($path, '/' . 'news-glyphs/' . $coverFileName, $createFolders, $backgroundColor, $imageQuality); //35
+            $image->save($path, 'news-glyphs/' . $coverFileName, $createFolders, $backgroundColor, $imageQuality); //35
 
         } else {
             $smarty->assign('fileinfo', '<font color=red>Nie skopiowano grafiki na serwer.</font>');
