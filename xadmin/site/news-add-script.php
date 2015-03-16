@@ -98,3 +98,4 @@ if ($result) {
 $smarty->assign('ctitle', 'DODAWANIE NEWSA');
 $smarty->assign('mainsection', '<font color="#6f91ac">DODAWANIE NEWSA</font>');
 $smarty->assign('body_template', 'site/news-add-form.tpl');
+$smarty->assign('data_dodania', $added);

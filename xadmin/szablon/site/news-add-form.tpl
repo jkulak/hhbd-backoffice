@@ -11,7 +11,7 @@ cala tresc newsa, nie uzywamy znacznikow BR, kazdy enter (lub nawet kilka po kol
 </div>
 
 <div class="rbox"><strong>DATA DODANIA*</strong><BR>
-<input type="text" name="date" value="sss{$data_dodania}" class="maxlen"><BR>
+<input type="text" name="date" value="{$data_dodania}" class="maxlen"><BR>
 data dodania newsa w formacie rrrr-mm-dd hh:mm:ss
 </div>
 
