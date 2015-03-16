@@ -35,6 +35,7 @@ if ($result) {
     if ('' != $tmpFile) {
         $path = $config['image_upload'];
         $original = $path . 'news-original/' . $coverFileName;
+        print_r($original);
 
         if (move_uploaded_file($tmpFile, $original)) {
             $smarty->assign('fileinfo', 'Skopiowano grafikę na serwer.');
