@@ -10,13 +10,13 @@ include ('template_top.php');
 include ('connect_to_database.php'); 
 
 
-$sql = 'SELECT name, website, profile, email, addres FROM labels WHERE id=' . $_GET['id'];
-$result = mysql_query($sql);
-$labelrow = mysql_fetch_array($result);
+$sql_query = 'SELECT name, website, profile, email, addres FROM labels WHERE id=' . $_GET['id'];
+$result = mysqli_query($sql, $sql_query);
+$labelrow = mysqli_fetch_array($result);
 
-$sql = 'SELECT cityid FROM city_label_lookup WHERE labelid=' . $_GET['id'];
-$result = mysql_query($sql);
-$cityrow = mysql_fetch_array($result);
+$sql_query = 'SELECT cityid FROM city_label_lookup WHERE labelid=' . $_GET['id'];
+$result = mysqli_query($sql, $sql_query);
+$cityrow = mysqli_fetch_array($result);
 
 ?>
 
@@ -59,13 +59,13 @@ $cityrow = mysql_fetch_array($result);
               <select name="cityid">
                 <option> </option>
                 <?php	
-	$result = mysql_query("SELECT id, name FROM cities ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM cities ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row['id'] . "\"" . ($cityrow['cityid'] == $row['id'] ? 'selected' : '') . ">" . $row["name"] . "</option>");
   	  }

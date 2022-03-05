@@ -20,7 +20,7 @@ $profile = $_POST['description'];
  
   //sprawdzanie poprawnosci danych
   if ($_POST[name] == "") {
-    print ("<b>Brak nazwy wytwórni!</b><br>");
+    print ("<b>Brak nazwy wytwï¿½rni!</b><br>");
 	goback();
     include('template_bottom.php');
 	exit();
@@ -46,50 +46,50 @@ $cityid = $_POST['cityid'];
   
   //jezeli tutaj doszlimy, to znaczy ze wszystkie dane w porzadku
 
-  print ("Wytwórnia: $_POST[name]<BR>");
+  print ("Wytwï¿½rnia: $_POST[name]<BR>");
   print ("Website: $_POST[website]<BR>");
   
-  $sql = "UPDATE labels SET name='$_POST[name]', profile='$profile', website='$_POST[website]', email='$_POST[email]', " .
+  $sql_query = "UPDATE labels SET name='$_POST[name]', profile='$profile', website='$_POST[website]', email='$_POST[email]', " .
          "addres='$_POST[addres]', updated='$data_dodania', updatedby='$_SESSION[userid]' " .
 		 "WHERE id=$_POST[id]";
 
 			 
-      if (mysql_query($sql)) {
-        print ("<BR><BR><B>Wytwórnia '$_POST[name]' zostala uaktualniona.</B><br><br>");		
+      if (mysqli_query($sql, $sql_query)) {
+        print ("<BR><BR><B>Wytwï¿½rnia '$_POST[name]' zostala uaktualniona.</B><br><br>");		
       } else {
-        echo("<P>Nie uaktualniono wytwórni '$_POST[name]' (" . mysql_error() . ")<br>");
+        echo("<P>Nie uaktualniono wytwï¿½rni '$_POST[name]' (" . mysqli_error($sql) . ")<br>");
       }
 	  
 // *****************
 // dodawanie nowego miasta do bazy miast
 // *****************
   if ($cityid == -1) {
-    $sql = "INSERT INTO cities (name, added, addedby) " .
+    $sql_query = "INSERT INTO cities (name, added, addedby) " .
       "VALUES ('$_POST[city]', '$data_dodania', '" . $_SESSION['userid'] . "')";
 	
-	if (mysql_query($sql)) {
-	  $cityid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $cityid = mysqli_insert_id($sql);
       print ("Dodano miasto '$_POST[city]' do bazy miast!<br>");		
       }
 	else {
-      echo("<P>Nie dodano miasta: '$_POST[city]'! (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano miasta: '$_POST[city]'! (" . mysqli_error($sql) . ")<br>");
 	  }
 	}
 	
 // kasowanie miast z powiazan z wykonawca
-  $sql = "DELETE FROM city_label_lookup WHERE labelid=$_POST[id]";
-  mysql_query($sql);	
+  $sql_query = "DELETE FROM city_label_lookup WHERE labelid=$_POST[id]";
+  mysqli_query($sql, $sql_query);	
 	
 	
   if ($cityid != '') {
-    $sql = "INSERT INTO city_label_lookup (cityid, labelid) " .
+    $sql_query = "INSERT INTO city_label_lookup (cityid, labelid) " .
       "VALUES ('$cityid', '$_POST[id]')";
 	
-	if (mysql_query($sql)) {
+	if (mysqli_query($sql, $sql_query)) {
       print ('Dodano miasto \'' . GetCityName($cityid) . "' dla wytworni: $_POST[id] <br>");		
       }
 	else {
-      echo('<P>Nie powiazania dla miasta \'' . GetCityName($cityid) . "'(" . mysql_error() . ")<br>");
+      echo('<P>Nie powiazania dla miasta \'' . GetCityName($cityid) . "'(" . mysqli_error($sql) . ")<br>");
 	  }
 	}  			  
   

@@ -8,22 +8,22 @@
  **/
  
  
-$sqlc = @mysql_connect('localhost', 'sql_hhbd', 'selekta100');
+$sqlc = @mysqli_connect('localhost', 'sql_hhbd', 'selekta100');
 if (!$sqlc) {
-	$smarty->assign('errormsg', 'Nie mo¿na po³±czyæ siê z baz±!');
+	$smarty->assign('errormsg', 'Nie moï¿½na poï¿½ï¿½czyï¿½ siï¿½ z bazï¿½!');
 	}
 
 $database = 'sql_hhbd_katalog';  
-if (!@mysql_select_db($database) ) {
-	$smarty->assign('errormsg', 'Nie mo¿na odnale¼æ bazy!');
+if (!@mysqli_select_db($database) ) {
+	$smarty->assign('errormsg', 'Nie moï¿½na odnaleï¿½ï¿½ bazy!');
 	}
  
  
-$sql = 'SELECT id, name FROM artists ORDER BY name';
-$result = mysql_query($sql);
+$sql_query = 'SELECT id, name FROM artists ORDER BY name';
+$result = mysqli_query($sql, $sql_query);
 
 print ('<strong>LISTA WYKONAWCOW:</strong><ul class="smallindent">');
-while ($row = mysql_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result)) {
 	print ('<li><strong>' . $row['id'] . '</strong>' . ' - ' . $row['name']);
 	}
 print ('</ul>');

@@ -10,7 +10,7 @@ include ('include/functions.php');
 include ('functions.php');
 include ('template_top.php');
 include ('connect_to_database.php');	
-include ('include/database-functions.php');	    
+include ('database-functions.php');	    
   
   function goback(){ 
    print ("<a href=\"add_label_form.php?name=$_POST[name]&website=$_POST[website]" .
@@ -23,7 +23,7 @@ $description = $_POST['description'];
  
   //sprawdzanie poprawnosci danych
   if ($_POST[name] == "") {
-    print ("<b>Brak nazwy wytwórni!</b><br>");
+    print ("<b>Brak nazwy wytwï¿½rni!</b><br>");
 	goback();
     include('template_bottom.php');
 	exit();
@@ -49,52 +49,52 @@ if ($cityid == '') {
   
   //jezeli tutaj doszlimy, to znaczy ze wszystkie dane w porzadku
 
-  print ("Wytwórnia: $_POST[name]<BR>");
+  print ("Wytwï¿½rnia: $_POST[name]<BR>");
   print ("Website: $_POST[website]<BR>");
   
   $urlname = create_urlname($_POST['name']);
   
-  $sql = "INSERT INTO labels (name, urlname, website, email, profile, addres, added, addedby) " .
+  $sql_query = "INSERT INTO labels (name, urlname, website, email, profile, addres, added, addedby) " .
 	"VALUES ('$_POST[name]', '$urlname', '$_POST[website]', '$_POST[email]', '$description', '$_POST[addres]', '$data_dodania', '" . $_SESSION['userid'] . "')";
 			 
-      if (mysql_query($sql)) {
-	    $insertid = mysql_insert_id();
-        print ("<BR><BR><B>Wytwórnia '$_POST[name]' zostala dodana, id: $insertid </B><br><br>");		
+      if (mysqli_query($sql, $sql_query)) {
+	    $insertid = mysqli_insert_id($sql);
+        print ("<BR><BR><B>Wytwï¿½rnia '$_POST[name]' zostala dodana, id: $insertid </B><br><br>");		
       } else {
-        echo("<P>Nie dodano wytwórni '$_POST[name]' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano wytwï¿½rni '$_POST[name]' (" . mysqli_error($sql) . ")<br>");
       }
 	  
 // *****************
 // dodawanie nowego miasta do bazy miast
 // *****************
   if ($cityid == -1) {
-    $sql = "INSERT INTO cities (name, added, addedby) " .
+    $sql_query = "INSERT INTO cities (name, added, addedby) " .
       "VALUES ('$_POST[city]', '$data_dodania', '" . $_SESSION['userid'] . "')";
 	
-	if (mysql_query($sql)) {
-	  $cityid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $cityid = mysqli_insert_id($sql);
       print ("Dodano miasto '$_POST[city]' do bazy miast!<br>");		
       }
 	else {
-      echo("<P>Nie dodano miasta: '$_POST[city]'! (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano miasta: '$_POST[city]'! (" . mysqli_error($sql) . ")<br>");
 	  }
 	}
 	
 	
   if ($cityid != '') {
-    $sql = "INSERT INTO city_label_lookup (cityid, labelid) " .
+    $sql_query = "INSERT INTO city_label_lookup (cityid, labelid) " .
       "VALUES ('$cityid', '$insertid')";
 	
-	if (mysql_query($sql)) {
+	if (mysqli_query($sql, $sql_query)) {
       print ('Dodano miasto \'' . GetCityName($cityid) . "' dla wytworni: $insertid <br>");		
       }
 	else {
-      echo("<P>Nie powiazania dla miasta $cityid (" . mysql_error() . ")<br>");
+      echo("<P>Nie powiazania dla miasta $cityid (" . mysqli_error($sql) . ")<br>");
 	  }
 	}  			  
 	
 		  
-  print ("<a href=\"add_label_form.php?\">Dodaj nastêpn¹ wytwórniê.</a><br>");
+  print ("<a href=\"add_label_form.php?\">Dodaj nastï¿½pnï¿½ wytwï¿½rniï¿½.</a><br>");
   
   include('template_bottom.php');	  
 ?>

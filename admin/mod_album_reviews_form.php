@@ -10,9 +10,9 @@ include ('connect_to_database.php');
 
   include ('template_top.php');
 
-$sql = 'SELECT id, review, addedby, albumid, title, added FROM album_reviews WHERE status=0';
-$result = mysql_query($sql);
-while ($row = mysql_fetch_array($result)) {
+$sql_query = 'SELECT id, review, addedby, albumid, title, added FROM album_reviews WHERE status=0';
+$result = mysqli_query($sql, $sql_query);
+while ($row = mysqli_fetch_array($result)) {
 	print ('<div id="reviews">');
     print ('Dodana ' . $row['added'] . ' przez: ' . $row['addedby'] . '<BR>');
 	print ('<strong>' . $row['title'] . '</strong><BR>');

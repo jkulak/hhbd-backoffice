@@ -29,14 +29,14 @@ $id = $_POST['albumid'];
 $filename = $_FILES['coverfile']['tmp_name'];
 
 // Get album data
-$sql = 'SELECT title, year, singiel FROM albums WHERE id=' . $id;
-$result = mysql_query($sql);
-$album = mysql_fetch_array($result);
+$sql_query = 'SELECT title, year, singiel FROM albums WHERE id=' . $id;
+$result = mysqli_query($sql, $sql_query);
+$album = mysqli_fetch_array($result);
 
 // Get artist name
-$sql = 'SELECT t1.name FROM artists AS t1, album_artist_lookup AS t2 WHERE (t1.id=t2.artistid AND t2.albumid=' . $id . ')';
-$result = mysql_query($sql);
-$artist = mysql_fetch_array($result);
+$sql_query = 'SELECT t1.name FROM artists AS t1, album_artist_lookup AS t2 WHERE (t1.id=t2.artistid AND t2.albumid=' . $id . ')';
+$result = mysqli_query($sql, $sql_query);
+$artist = mysqli_fetch_array($result);
 
 // Build image filename
 $newfilename = strtolower(trim($artist[0]) . '-' . trim($album[0]));
@@ -49,8 +49,8 @@ $thumb75 = $content_directory . '/a/' . 'th/' . $newfilename . '-hhbdpl-th.jpg';
 $newcover = $newfilename . '-hhbdpl.jpg';
 
 // DODANIE NAZWY OKLADKI DO TABELI ALBUMÓW
-$sql = 'UPDATE albums SET cover="' . $newcover . '" WHERE id=' . $id;
-if (mysql_query($sql)) {
+$sql_query = 'UPDATE albums SET cover="' . $newcover . '" WHERE id=' . $id;
+if (mysqli_query($sql, $sql_query)) {
     if ( move_uploaded_file($filename, $newname) ) {
 
         // Causes trouble in case file already exists
@@ -63,7 +63,7 @@ if (mysql_query($sql)) {
         echo '<p>$newname:<pre>' . $newname . "</pre></p>";
     }
 } else {
-    echo('<P>Nie dodano okladki do bazy! (' . mysql_error() . ')<br>');
+    echo('<P>Nie dodano okladki do bazy! (' . mysqli_error($sql) . ')<br>');
 }
 
 include('template_bottom.php');

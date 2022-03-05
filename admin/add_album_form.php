@@ -31,17 +31,17 @@ include 'connect_to_database.php';
                 <input name="title" type="text" size="20" maxlength="255" value="<?php print("$_GET[title]");?>" >
               </p>
             </td>
-            <td width="180" height="90" valign="top">wytwórnia:<br>
+            <td width="180" height="90" valign="top">wytwï¿½rnia:<br>
               <select name="labelid">
                 <option> </option>
                 <?php
-$result = mysql_query("SELECT id, name FROM labels ORDER BY name");
+$result = mysqli_query($sql, "SELECT id, name FROM labels ORDER BY name");
 if (!$result) {
-	echo ("<P>Error performing query: " . mysql_error() . "</P>");
+	echo ("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	exit();
 }
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result)) {
 	print("<option value=\"" . $row["id"] . "\"" . ($_GET['labelid'] == $row["id"] ? 'selected' : '') . ">" . $row["name"] . "</option>");
 }
 ?>
@@ -64,13 +64,13 @@ while ($row = mysql_fetch_array($result)) {
               <select name="artistid">
                 <option> </option>
                 <?php
-$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
 if (!$result) {
-	echo ("<P>Error performing query: " . mysql_error() . "</P>");
+	echo ("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	exit();
 }
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result)) {
 
 	print("<option value=\"" . $row["id"] . "\"" . ($_GET['artistid'] == $row["id"] ? 'selected' : '') . ">" . $row["name"] . "</option>");
 }
@@ -108,13 +108,13 @@ while ($row = mysql_fetch_array($result)) {
                 <option value="">longplay</option>
                 <?php
 
-$result = mysql_query("SELECT id, title FROM albums ORDER BY title");
+$result = mysqli_query($sql, "SELECT id, title FROM albums ORDER BY title");
 if (!$result) {
-	echo ("<P>Error performing query: " . mysql_error() . "</P>");
+	echo ("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	exit();
 }
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result)) {
 
 	print("<option value=\"" . $row['id'] . "\"" . ($_GET['epforid'] == $row['id'] ? 'selected' : '') . ">" . $row["title"] . "</option>");
 }

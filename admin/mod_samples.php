@@ -18,8 +18,8 @@ if ($action == 'reject') {
 $sample = $_POST['sample'];
 if (!isset($sample)) $sample = $_GET['sample'];
 
-$sql = 'UPDATE song_samples SET sample="' . $sample . '", status="' . $status . '" WHERE id="' . $id . '"';
-$result = mysql_query($sql);
+$sql_query = 'UPDATE song_samples SET sample="' . $sample . '", status="' . $status . '" WHERE id="' . $id . '"';
+$result = mysql_query($sql, $sql_query);
 
 header ( 'Location: index.php');
 

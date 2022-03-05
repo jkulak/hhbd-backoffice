@@ -16,9 +16,9 @@
 	exit;      
     }
 	
-  $sql = 'SELECT title FROM songs WHERE id=' . $_GET['id'];
-  $result = mysql_query($sql);
-  $album = mysql_fetch_array($result);	
+  $sql_query = 'SELECT title FROM songs WHERE id=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
+  $album = mysqli_fetch_array($result);	
   
   
   
@@ -29,10 +29,10 @@
   
   
    // USUWANIE Z BAZY artists
-  $sql = 'DELETE FROM songs WHERE id=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM songs WHERE id=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
     print ("<b>Utwor: $album[0] (ID: $_GET[id]) zostal usuniety.</b>");
@@ -41,79 +41,79 @@
 
  	
   // USUWANIE Z albumow
-  $sql = 'DELETE FROM album_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM album_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' albumow.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' albumow.</b>');
     }
   print ('<br>'); 	
   
   // USUWANIE Z feat
-  $sql = 'DELETE FROM feature_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM feature_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' featuringow.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' featuringow.</b>');
     }
   print ('<br>'); 	 
   
   // USUWANIE Z msuic
-  $sql = 'DELETE FROM music_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM music_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' music.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' music.</b>');
     }
   print ('<br>'); 	  
   
   // USUWANIE Z scratch
-  $sql = 'DELETE FROM scratch_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM scratch_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' scratch.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' scratch.</b>');
     }
   print ('<br>'); 	    
   
   // USUWANIE Z artist
-  $sql = 'DELETE FROM artist_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM artist_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' artist.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' artist.</b>');
     }
   print ('<br>'); 	  
   
   // USUWANIE Z remix
-  $sql = 'DELETE FROM remix_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM remix_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' remix.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' remix.</b>');
     }
   print ('<br>'); 	  
   
   // USUWANIE Z scratch
-  $sql = 'DELETE FROM video_lookup WHERE songid=' . $_GET['id'];
-  $result = mysql_query($sql);
+  $sql_query = 'DELETE FROM video_lookup WHERE songid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);
   if (!$result) {
-    print (mysql_error());
+    print (mysqli_error($sql));
 	}
   else {
-    print ("<b>Usunieto powiazanie dla " . mysql_affected_rows() . ' video.</b>');
+    print ("<b>Usunieto powiazanie dla " . mysqli_affected_rows($sql) . ' video.</b>');
     }
   print ('<br>'); 	  
 	

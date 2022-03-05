@@ -14,10 +14,10 @@ if(($_POST['login'] == "") OR ($_POST['password']) == "") {
   exit;
   }
 
-$sql = "SELECT id, login, name, added, timesloggedin, lastlogin FROM users WHERE (login='" . $_POST['login'] . "' AND pass=('" . md5($_POST['password']) . "'))";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
-$num = mysql_num_rows($result);
+$sql_query = "SELECT id, login, name, added, timesloggedin, lastlogin FROM users WHERE (login='" . $_POST['login'] . "' AND pass=('" . md5($_POST['password']) . "'))";
+$result = mysqli_query($sql, $sql_query);
+$row = mysqli_fetch_array($result);
+$num = mysqli_num_rows($result);
 
 if($num == 1) {
 
@@ -31,8 +31,8 @@ if($num == 1) {
   $data_logowania = date("YmdHis");
   $timeslogedin ++ ;
 
-  $sql = "UPDATE users SET lastlogin=$data_logowania, timesloggedin=$timesloggedin WHERE id=$row[id]";
-  $result = mysql_query($sql);
+  $sql_query = 'UPDATE users SET lastlogin="' . date('YmdHis') . '", timesloggedin=(timesloggedin+1) WHERE id="' . $row['id'] . '"';
+  $result = mysqli_query($sql, $sql_query);
   header("Location: main.php");
   exit();
   }

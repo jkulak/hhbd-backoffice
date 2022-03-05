@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 include('template_top.php');
 include ('connect_to_database.php');	  
 include ('functions.php');
-include ('include/database-functions.php');
+include ('database-functions.php');
 include ('include/functions.php');
   
   
@@ -233,42 +233,42 @@ include ('include/functions.php');
   //jezeli tutaj doszlimy, to znaczy ze wszystkie dane w porzadku
   
   if ($artist1id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist1]', '" . create_urlname($_GET[artist1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist1]', '" . create_urlname($_GET[artist1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[artist1]'<BR><BR>");
-      $artist1id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[artist1]'<BR><BR>");
+      $artist1id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[artist1]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[artist1]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}
 
 // ARTIST 2
 	
   if ($artist2id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist2]', '" . create_urlname($_GET[artist2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist2]', '" . create_urlname($_GET[artist2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[artist2]'<BR><BR>");
-      $artist2id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[artist2]'<BR><BR>");
+      $artist2id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[artist2]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[artist2]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}
 	
 // ARTIST 3
 
   if ($artist3id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist3]', '" . create_urlname($_GET[artist3], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist3]', '" . create_urlname($_GET[artist3], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[artist3]'<BR><BR>");
-      $artist3id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[artist3]'<BR><BR>");
+      $artist3id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[artist3]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[artist3]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 	
@@ -276,14 +276,14 @@ include ('include/functions.php');
 // ARTIST 4
 
   if ($artist4id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist4]', '" . create_urlname($_GET[artist4], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[artist4]', '" . create_urlname($_GET[artist4], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[artist4]'<BR><BR>");
-      $artist4id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[artist4]'<BR><BR>");
+      $artist4id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[artist4]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[artist4]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 		
@@ -291,107 +291,107 @@ include ('include/functions.php');
 	
   // dodajemy ewentualnie FEAT1 artist
   if ($feat1id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat1]', '" . create_urlname($_GET[feat1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat1]', '" . create_urlname($_GET[feat1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[feat1]'<BR><BR>");
-      $feat1id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[feat1]'<BR><BR>");
+      $feat1id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feat1]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feat1]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}
 	
   // dodajemy ewentualnie feattype1 artist
   if ($feattype1id == -1) {
-    $sql = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype1]')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype1]')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowy typ ficzuringu: '$_GET[feattype1]'<BR><BR>");
-      $feattype1id = mysql_insert_id();
+      $feattype1id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feattype1]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feattype1]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 	
   // dodajemy ewentualnie FEAT2 artist	
   if ($feat2id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat2]', '" . create_urlname($_GET[feat2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat2]', '" . create_urlname($_GET[feat2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[feat2]'<BR><BR>");
-      $feat2id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[feat2]'<BR><BR>");
+      $feat2id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feat2]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feat2]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}
 	
   // dodajemy ewentualnie feattype2 artist	
   if ($feattype2id == -1) {
-    $sql = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype2]')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype2]')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowy typ ficzuringu: '$_GET[feattype2]'<BR><BR>");
-      $feattype2id = mysql_insert_id();
+      $feattype2id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feattype2]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feattype2]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 	
   // dodajemy ewentualnie FEAT3 artist	
   if ($feat3id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat3]', '" . create_urlname($_GET[feat3], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat3]', '" . create_urlname($_GET[feat3], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[feat3]'<BR><BR>");
-      $feat3id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[feat3]'<BR><BR>");
+      $feat3id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feat3]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feat3]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 	
 	
   // dodajemy ewentualnie feattype3 artist
   if ($feattype3id == -1) {
-    $sql = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype3]')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype3]')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowy typ ficzuringu: '$_GET[feattype3]'<BR><BR>");
-      $feattype3id = mysql_insert_id();
+      $feattype3id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feattype3]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feattype3]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}			
 
   // dodajemy ewentualnie FEAT4 artist	
   if ($feat4id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat4]', '" . create_urlname($_GET[feat4], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[feat4]', '" . create_urlname($_GET[feat4], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê: '$_GET[feat4]'<BR><BR>");
-      $feat4id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½: '$_GET[feat4]'<BR><BR>");
+      $feat4id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykowacy: '$_GET[feat4]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykowacy: '$_GET[feat4]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 
 
   // dodajemy ewentualnie feattype4 artist
   if ($feattype4id == -1) {
-    $sql = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype4]')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO feattypes (feattype) VALUES ('$_GET[feattype4]')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowy typ ficzuringu: '$_GET[feattype4]'<BR><BR>");
-      $feattype4id = mysql_insert_id();
+      $feattype4id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_GET[feattype4]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_GET[feattype4]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 	
@@ -469,66 +469,66 @@ include ('include/functions.php');
 	
  // dodajemy ewentualnie MUSIC 1 artist	
   if ($music1id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[music1]', '" . create_urlname($_GET[music1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[music1]', '" . create_urlname($_GET[music1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê (muzyki): '$_GET[music1]'<BR><BR>");
-      $music1id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½ (muzyki): '$_GET[music1]'<BR><BR>");
+      $music1id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy (muzyka): '$_GET[music1]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy (muzyka): '$_GET[music1]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}		
 	
  // dodajemy ewentualnie MUSIC 2 artist	
   if ($music2id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[music2]', '" . create_urlname($_GET[music2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[music2]', '" . create_urlname($_GET[music2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê (muzyki): '$_GET[music2]'<BR><BR>");
-      $music2id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½ (muzyki): '$_GET[music2]'<BR><BR>");
+      $music2id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy (muzyka): '$_GET[music2]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy (muzyka): '$_GET[music2]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}
 
  // dodajemy ewentualnie scratch 1 artist	
   if ($scratch1id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[scratch1]', '" . create_urlname($_GET[scratch1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[scratch1]', '" . create_urlname($_GET[scratch1], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê (scratch1): '$_GET[scratch1]'<BR><BR>");
-      $scratch1id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½ (scratch1): '$_GET[scratch1]'<BR><BR>");
+      $scratch1id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy (scratch1): '$_GET[scratch1]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy (scratch1): '$_GET[scratch1]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}		
 	
  // dodajemy ewentualnie scratch 2 artist	
   if ($scratch2id == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[scratch2]', '" . create_urlname($_GET[scratch2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[scratch2]', '" . create_urlname($_GET[scratch2], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê (scratch2): '$_GET[scratch2]'<BR><BR>");
-      $scratch2id = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½ (scratch2): '$_GET[scratch2]'<BR><BR>");
+      $scratch2id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy (scratch2): '$_GET[scratch2]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy (scratch2): '$_GET[scratch2]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}	
 	
  // dodajemy ewentualnie remix artist	
   if ($remixid == -1) {
-    $sql = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[remix]', '" . create_urlname($_GET[remix], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, urlname, added, addedby) VALUES ('$_GET[remix]', '" . create_urlname($_GET[remix], 1, 1) . "', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
-	  print ("Dodano do bazy nowego wykonawcê (remix): '$_GET[remix]'<BR><BR>");
-      $remixid = mysql_insert_id();
+	  print ("Dodano do bazy nowego wykonawcï¿½ (remix): '$_GET[remix]'<BR><BR>");
+      $remixid = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy (remix): '$_GET[remix]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy (remix): '$_GET[remix]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}		
 	
@@ -538,7 +538,7 @@ include ('include/functions.php');
 	// wszystko co bylo ewentualnie do dodania, zostalo dodane			
 		
 
-  print ("Tytu³: '$_GET[title]'<BR>");
+  print ("Tytuï¿½: '$_GET[title]'<BR>");
   $artist = GetArtistName($artist1id); 
   print ("Wykonawca: '$artist' (id: $artist1id)<BR>");
   $label = GetLabelName($labelid);
@@ -561,54 +561,54 @@ include ('include/functions.php');
 	
 	$inum = 1;		
 	
-	$sql = 'SELECT title, urlname FROM songs WHERE urlname="' . $newname . '"';
-	$res = mysql_query($sql);
+	$sql_query = 'SELECT title, urlname FROM songs WHERE urlname="' . $newname . '"';
+	$res = mysqli_query($sql, $sql_query);
 	
-	while (mysql_num_rows($res)) {		
-		//while ($znal = mysql_fetch_array($res)) {
+	while (mysqli_num_rows($res)) {		
+		//while ($znal = mysqli_fetch_array($res)) {
 			//print ('<BR>* znalezione: ' . $znal['title'] . ', ' . $znal['urlname']);
 			//}	
 		
 		$inum++;
 		$newname = $basename . '_' . $inum;		
-		$sql = 'SELECT title, urlname FROM songs WHERE urlname="' . $newname . '"';
-		$res = mysql_query($sql);
+		$sql_query = 'SELECT title, urlname FROM songs WHERE urlname="' . $newname . '"';
+		$res = mysqli_query($sql, $sql_query);
 		}		
 		
 		
   
-  $sql = "INSERT INTO songs (title, urlname, length, bpm, acapella, instrumental, radio, addedby, added ) VALUES ( " .
+  $sql_query = "INSERT INTO songs (title, urlname, length, bpm, acapella, instrumental, radio, addedby, added ) VALUES ( " .
 	  "'$_GET[title]', '$newname', '$length', '$_GET[bpm]', " .
 	  "'$acapella', '$instrumental', '$radio', " .
 	  "'" . $_SESSION['userid'] . "', '$data_dodania')";
 			 
-      if (mysql_query($sql)) {
-        $songid = mysql_insert_id();
-		print ("<BR><BR><B>Piosenka '$_GET[title]' zostala dodana, id:" . mysql_insert_id() . '</B><br>');		
+      if (mysqli_query($sql, $sql_query)) {
+        $songid = mysqli_insert_id($sql);
+		print ("<BR><BR><B>Piosenka '$_GET[title]' zostala dodana, id:" . mysqli_insert_id($sql) . '</B><br>');		
       } else {
-        echo("<P>Nie dodano piosenki '$_GET[title]' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano piosenki '$_GET[title]' (" . mysqli_error($sql) . ")<br>");
       }
 	  
 	  }
 	 else $songid = $oldsongid;
   
   // dodaine powiazania song - album
-    $sql = "INSERT INTO album_lookup (albumid, songid, track) VALUES (" .
+    $sql_query = "INSERT INTO album_lookup (albumid, songid, track) VALUES (" .
           "'$_GET[albumid]', '$songid', '$_GET[track]')";
-   if (mysql_query($sql)) {
+   if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: albumid: $_GET[albumid], songid: $songid <br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }		  
 
   // dodaine powiazania song - artist
 	if ($artist1id != "") {
-	  $sql = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
+	  $sql_query = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
           "'$artist1id', '$songid')";
-	   if (mysql_query($sql)) {
+	   if (mysqli_query($sql, $sql_query)) {
         print ("Dodane powiazanie: artist1id: $artist1id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }		
 	    
 	}
@@ -616,125 +616,125 @@ include ('include/functions.php');
 
   // dodaine powiazania song - artist2
   if ($artist2id != "") {
-  $sql = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
+  $sql_query = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
           "'$artist2id', '$songid')";
-   if (mysql_query($sql)) {
+   if (mysqli_query($sql, $sql_query)) {
         print ("Dodane powiazanie: artist2id: $artist2id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }		
 	}
 	  
 	  
   // dodaine powiazania song - artist3
 	if ($artist3id != "") {  
-  $sql = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
+  $sql_query = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
           "'$artist3id', '$songid')";
-   if (mysql_query($sql)) {
+   if (mysqli_query($sql, $sql_query)) {
         print ("Dodane powiazanie: artist3id: $artist3id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }	
 	 }		  	  
 
   // dodaine powiazania song - artist4
 	if ($artist4id != "") {  
-  $sql = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
+  $sql_query = "INSERT INTO artist_lookup (artistid, songid) VALUES (" .
           "'$artist4id', '$songid')";
-   if (mysql_query($sql)) {
+   if (mysqli_query($sql, $sql_query)) {
         print ("Dodane powiazanie: artist4id: $artist4id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			
    }	    
 
 
   // dodaine powiazania song - feat 1
   if ($feat1id != "") {
-    $sql = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
+    $sql_query = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
           "'$feat1id', '$songid', '$feattype1id')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: feat1id: $feat1id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}
 
   // dodaine powiazania song - feat 2
   if ($feat2id != "") {
-    $sql = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
+    $sql_query = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
           "'$feat2id', '$songid', '$feattype2id')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: feat2id: $feat2id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}
 	
   // dodaine powiazania song - feat 3
   if ($feat3id != "") {
-    $sql = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
+    $sql_query = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
           "'$feat3id', '$songid', '$feattype3id')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: feat3id: $feat3id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}
   // dodaine powiazania song - feat 4
   if ($feat4id != "") {
-    $sql = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
+    $sql_query = "INSERT INTO feature_lookup (artistid, songid, feattype) VALUES (" .
           "'$feat4id', '$songid', '$feattype4id')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: feat4id: $feat4id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}
 	
 	
   // dodaine powiazania song - music 1
   if ($music1id != "") {
-    $sql = "INSERT INTO music_lookup (artistid, songid) VALUES (" .
+    $sql_query = "INSERT INTO music_lookup (artistid, songid) VALUES (" .
           "'$music1id', '$songid')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: music1id: $music1id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}	
 	
   // dodaine powiazania song - music 2
   if ($music2id != "") {
-    $sql = "INSERT INTO music_lookup (artistid, songid) VALUES (" .
+    $sql_query = "INSERT INTO music_lookup (artistid, songid) VALUES (" .
           "'$music2id', '$songid')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: music2id: $music2id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}	
 	
   // dodaine powiazania song - scratch 1
   if ($scratch1id != "") {
-    $sql = "INSERT INTO scratch_lookup (artistid, songid) VALUES (" .
+    $sql_query = "INSERT INTO scratch_lookup (artistid, songid) VALUES (" .
           "'$scratch1id', '$songid')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: scratch2id: $scratch1id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}		
 	
 	
   // dodaine powiazania song - scratch 2
   if ($scratch2id != "") {
-    $sql = "INSERT INTO scratch_lookup (artistid, songid) VALUES (" .
+    $sql_query = "INSERT INTO scratch_lookup (artistid, songid) VALUES (" .
           "'$scratch2id', '$songid')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: scratch2id: $scratch2id, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}		
 	
@@ -742,12 +742,12 @@ include ('include/functions.php');
 
   // dodaine powiazania remix artist
   if ($remixid != "") {
-    $sql = "INSERT INTO remix_lookup (artistid, songid) VALUES (" .
+    $sql_query = "INSERT INTO remix_lookup (artistid, songid) VALUES (" .
           "'$remixid', '$songid')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: remixid: $remixid, songid: $songid<br>");		
       } else {
-        echo("<P>Nie dodano powiazania! remixid: $remixid, songid: $songid' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania! remixid: $remixid, songid: $songid' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}		
 	
@@ -755,7 +755,7 @@ include ('include/functions.php');
   
 
 	
-  print ("<a href=\"add_song_form.php?addedby=$_GET[addedby]&artist1id=$artist1id&artist2id=$artist2id&artist3id=$artistid3&track=" . ($_GET[track] + 1) . "&albumid=$albumid\">Dodaj nastêpn¹</a><br>");
+  print ("<a href=\"add_song_form.php?addedby=$_GET[addedby]&artist1id=$artist1id&artist2id=$artist2id&artist3id=$artistid3&track=" . ($_GET[track] + 1) . "&albumid=$albumid\">Dodaj nastï¿½pnï¿½</a><br>");
   
   
   include('template_bottom.php');	  

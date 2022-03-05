@@ -2,9 +2,9 @@
   
    // Connect to the database server
   print ("test");
-  $dbcnx = @mysql_pconnect("localhost", "fee", "f33del");
+  $dbcnx = @mysqli_pconnect("localhost", "fee", "f33del");
     if (!$dbcnx) {
-      print ("Nie mozna sie polaczyc z baza: " . mysql_error() . "<br>");
+      print ("Nie mozna sie polaczyc z baza: " . mysqli_error($sql) . "<br>");
       exit();
       }
 	else {
@@ -14,8 +14,8 @@
   $nazwa_bazy = 'katalog';
   
   
-  if (! @mysql_select_db($nazwa_bazy) ) {
-      print ("Nie mozna odnalezc bazy: $nazwa_bazy (" . mysql_error() . ")<br>");
+  if (! @mysqli_select_db($nazwa_bazy) ) {
+      print ("Nie mozna odnalezc bazy: $nazwa_bazy (" . mysqli_error($sql) . ")<br>");
       exit();
 	  }
 	else {
@@ -25,17 +25,17 @@
   
   
   // Request the text of all the jokes
-  $result = mysql_query(
+  $result = mysqli_query($sql,
             "SELECT name FROM media ORDER BY name DESC");
   if (!$result) {
     echo("<P>Error performing query: " .
-         mysql_error() . "</P>");
+         mysqli_error($sql) . "</P>");
     exit();
   }
 
   
   print ('          <select name="select2">');
-  while ( $row = mysql_fetch_array($result) ) {
+  while ( $row = mysqli_fetch_array($result) ) {
     echo("<option>" . $row["name"] . "</option>");
   }
   

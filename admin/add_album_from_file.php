@@ -47,18 +47,18 @@ foreach ($songs as $line_num => $song) {
 	$title = str_replace($toreplace, $replaceto, $title);
 
 	$data_dodania = date("YmdHis");
-	$sql = 'INSERT INTO songs (title, urlname, length, added, addedby) VALUES ("' . $title . '","' . create_urlname($title, 1, 1) . '", ' . $length .
+	$sql_query = 'INSERT INTO songs (title, urlname, length, added, addedby) VALUES ("' . $title . '","' . create_urlname($title, 1, 1) . '", ' . $length .
 	', \'' . $data_dodania . '\', ' . $_SESSION['userid'] . ')';
 
-	if ($result = mysql_query($sql)) {
+	if ($result = mysqli_query($sql, $sql_query)) {
 		print('track: ' . $track . ' dodany<BR>');
-		$songid = mysql_insert_id();
-		$sql = "INSERT INTO album_lookup (albumid, songid, track) VALUES ('$albumid', '$songid', '$track')";
+		$songid = mysqli_insert_id($sql);
+		$sql_query = "INSERT INTO album_lookup (albumid, songid, track) VALUES ('$albumid', '$songid', '$track')";
 
-		if (mysql_query($sql)) {
+		if (mysqli_query($sql, $sql_query)) {
 			print("<BR>Dodane powiazanie: albumid: $albumid, songid: $songid <br>");
 		} else {
-			echo ("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+			echo ("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
 		}
 	}
 }

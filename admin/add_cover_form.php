@@ -19,13 +19,13 @@ if (!isset($_SESSION['username'])) {
 	
 	 <option> </option>
                   <?php
-  $result = mysql_query('SELECT id, title FROM albums ORDER BY title');
+  $result = mysqli_query($sql, 'SELECT id, title FROM albums ORDER BY title');
     if (!$result) {
-      echo('<P>Error performing query: ' . mysql_error() . '</P>');
+      echo('<P>Error performing query: ' . mysqli_error($sql) . '</P>');
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
       print ('<option value="' . $row['id'] . '">' . $row['title'] . '</option>');
   	  }
   ?>

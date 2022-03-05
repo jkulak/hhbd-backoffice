@@ -15,9 +15,9 @@ $filename = $_FILES['label_logo']['tmp_name'];
 
 print ('Tymczsowa nazwa pliku: ' . $filename . '<BR><BR>');
 
-$sql = 'SELECT name FROM labels WHERE id=' . $id;
-$result = mysql_query($sql);
-$labelrow = mysql_fetch_array($result);
+$sql_query = 'SELECT name FROM labels WHERE id=' . $id;
+$result = mysqli_query($sql, $sql_query);
+$labelrow = mysqli_fetch_array($result);
 $name = $labelrow['name'];
   
 $newfilename = strtolower($name);
@@ -28,11 +28,11 @@ $path = '/home/hhbd/www/php/app/s.hhbd.pl/hhbdcontent/l/';
 $newname = $path . $newfilename . '-hhbdpl.jpg';
 $newcover = $newfilename . '-hhbdpl.jpg';
   
-// DODANIE NAZWY OKLADKI DO TABELI ALBUMÓW
-$sql = 'UPDATE labels SET logo="' . $newcover . '" WHERE id=' . $id;
+// DODANIE NAZWY OKLADKI DO TABELI ALBUMï¿½W
+$sql_query = 'UPDATE labels SET logo="' . $newcover . '" WHERE id=' . $id;
 
-if (mysql_query($sql)) {
-    $albumid = mysql_insert_id();
+if (mysqli_query($sql, $sql_query)) {
+    $albumid = mysqli_insert_id($sql);
 	print ("<BR><B>logo zostalo dodane do bazy!</B><br>");		
 
     if (move_uploaded_file($filename,$newname)) {
@@ -45,7 +45,7 @@ if (mysql_query($sql)) {
 	
 	}
 else {
-	echo('<P>Nie dodano loga do bazy! (' . mysql_error() . ')<br>');
+	echo('<P>Nie dodano loga do bazy! (' . mysqli_error($sql) . ')<br>');
 	}
 
 

@@ -2,3 +2,5 @@
 templates_c/
 xadmin/vendor/
 admin/vendor/
+*.ini-dev
+*.ini-prod
