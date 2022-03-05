@@ -10,16 +10,16 @@ if (!isset($_SESSION['username'])) {
   include ('connect_to_database.php');
   
   
-  $sql = 'SELECT title, labelid, year, media_mc, media_cd, media_lp, catalog_mc, catalog_lp, catalog_cd, epfor, singiel, description, premier ' . 
+  $sql_query = 'SELECT title, labelid, year, media_mc, media_cd, media_lp, catalog_mc, catalog_lp, catalog_cd, epfor, singiel, description, premier ' . 
     'FROM albums WHERE id=' . $_GET['id'];
-  $result = mysql_query($sql);
-  $albumrow = mysql_fetch_array($result);
+  $result = mysqli_query($sql, $sql_query);
+  $albumrow = mysqli_fetch_array($result);
   
    
   
-  $sql = 'SELECT artistid FROM album_artist_lookup WHERE albumid=' . $_GET['id'];
-  $result = mysql_query($sql);  
-  while( $temprow = mysql_fetch_array($result) ){
+  $sql_query = 'SELECT artistid FROM album_artist_lookup WHERE albumid=' . $_GET['id'];
+  $result = mysqli_query($sql, $sql_query);  
+  while( $temprow = mysqli_fetch_array($result) ){
   	$artists[] = $temprow['artistid'];
   } // while
     
@@ -47,19 +47,19 @@ if (!isset($_SESSION['username'])) {
                 <input name="title" type="text" size="20" maxlength="255" value="<?php print($albumrow['title']); ?>" >
               </p>
             </td>
-            <td width="140" height="90" valign="top">wytwórnia:<br>
+            <td width="140" height="90" valign="top">wytwï¿½rnia:<br>
               <input name="label" type="text" size="20" maxlength="255">
               <br>
               <select name="labelid">
                 <option> </option>
                 <?php
-  $result = mysql_query("SELECT id, name FROM labels ORDER BY name");
+  $result = mysqli_query($sql, "SELECT id, name FROM labels ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $labelrow = mysql_fetch_array($result) ) {
+    while ( $labelrow = mysqli_fetch_array($result) ) {
       print ("<option value=\"" . $labelrow['id'] . "\"" . ($albumrow['labelid'] == $labelrow['id'] ? 'selected' : '') . ">" . $labelrow['name'] . "</option>");
   	  }
   ?>
@@ -86,13 +86,13 @@ if (!isset($_SESSION['username'])) {
               <select name="artistid1">
                 <option> </option>
                 <?php	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $artistrow = mysql_fetch_array($result) ) {
+    while ( $artistrow = mysqli_fetch_array($result) ) {
 	  print ("<option value=\"" . $artistrow['id'] . "\"" . ($artists[0] == $artistrow['id'] ? 'selected' : '') . ">" . $artistrow['name'] . "</option>");
   	  }
   ?>
@@ -104,13 +104,13 @@ if (!isset($_SESSION['username'])) {
               <select name="artistid2">
                 <option> </option>
                 <?php	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error() . "</P>");
 	  exit();
   	  }
 	    
-    while ( $artistrow = mysql_fetch_array($result) ) {
+    while ( $artistrow = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $artistrow['id'] . "\"" . ($artists[1] == $artistrow['id'] ? 'selected' : '') . ">" . $artistrow['name'] . "</option>");
   	  }
@@ -123,13 +123,13 @@ if (!isset($_SESSION['username'])) {
               <select name="artistid3">
                 <option> </option>
                 <?php	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error() . "</P>");
 	  exit();
   	  }
 	    
-    while ( $artistrow = mysql_fetch_array($result) ) {
+    while ( $artistrow = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $artistrow['id'] . "\"" . ($artists[2] == $artistrow['id'] ? 'selected' : '') . ">" . $artistrow['name'] . "</option>");
   	  }
@@ -164,13 +164,13 @@ if (!isset($_SESSION['username'])) {
                 <?php
 	
 
-	$result = mysql_query("SELECT id, title FROM albums ORDER BY title");
+	$result = mysqli_query($sql, "SELECT id, title FROM albums ORDER BY title");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error() . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row['id'] . "\"" . ($albumrow['epfor'] == $row['id'] ? 'selected' : '') . ">" . $row["title"] . "</option>");
   	  }

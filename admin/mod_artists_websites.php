@@ -14,9 +14,8 @@ else if ($action == 'reject') {
 else header ( 'Location: admin.php?s=urlhack');
 
 
-
-$sql = 'UPDATE artists_websites SET status="' . $status . '" WHERE id="' . $id . '"';
-$result = mysql_query($sql);
+$sql_query = 'UPDATE artists_websites SET status="' . $status . '" WHERE id="' . $id . '"';
+$result = mysql_query($sql, $sql_query);
 
 header ( 'Location: index.php');
 

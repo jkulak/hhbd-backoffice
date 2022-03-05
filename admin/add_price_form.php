@@ -35,13 +35,13 @@ if (!isset($_SESSION['username'])) {
                 <?php
 	
 
-	$result = mysql_query("SELECT id, title FROM albums ORDER BY title");
+	$result = mysqli_query($sql, "SELECT id, title FROM albums ORDER BY title");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['albumid'] == $row["id"] ? 'selected' : '') . ">" . $row["title"] . "</option>");
   	  }
@@ -53,7 +53,7 @@ if (!isset($_SESSION['username'])) {
           </tr>
           <tr> 
             <td height="65" valign="top"> 
-              <p><b>LINK DO P£YTY W TYM SKLEPIE</b><br>
+              <p><b>LINK DO Pï¿½YTY W TYM SKLEPIE</b><br>
                 <input name="link" type="text" style="width: 380px" maxlength="255"  value="<?php print("$_GET[artist]"); ?>">
                 <font size="1"><br>
                 link do albumu w wybranym sklepie</font></p>
@@ -64,19 +64,19 @@ if (!isset($_SESSION['username'])) {
               <select name="shopid">
 
 <?php
-$result = mysql_query("SELECT id,name FROM eshops ORDER BY name");
+$result = mysqli_query($sql, "SELECT id,name FROM eshops ORDER BY name");
 if (!$result) {
-	echo("<P>Error performing query: " . mysql_error() . "</P>");
+	echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	exit();
  	}
-while ( $row = mysql_fetch_array($result) ) {
+while ( $row = mysqli_fetch_array($result) ) {
  print ('<option value="' . $row['id'] . '"' . ($_GET['shopid'] == $row['id'] ? 'selected' : '') . '>' . $row['name'] . '</option>');
  }
  ?>
 
               </select>
               <br>
-              <font size="1">wybierz sklep z którego dodajesz link</font></td>
+              <font size="1">wybierz sklep z ktï¿½rego dodajesz link</font></td>
           </tr>
           <tr> 
             <td height="0" valign="top" align="left"> 

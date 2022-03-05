@@ -35,7 +35,7 @@ function changename($oldname, $date) {
 	$name = str_replace($toreplace, '_', $name);
 
 	// ZMIANA POLSKICH LITEREK!
-	$toreplace = array('@', '$', '±', 'æ', 'ê', '³', 'ñ', 'ó', '¶', '¼', '¿', '¦', '£', '¯', 'Ñ', 'Ê', 'Æ', '¡', 'Ó', '¬');
+	$toreplace = array('@', '$', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½');
 	$replaceto = array('a', 's', 'a', 'c', 'e', 'l', 'n', 'o', 's', 'z', 'z', 'S', 'L', 'Z', 'N', 'E', 'C', 'A', 'O', 'Z');   
 	$name = str_replace($toreplace, $replaceto, $name);
 	
@@ -82,11 +82,11 @@ $added = date('Y-m-d H:i:s');
 
 // DODANIE MIASTA
 if ($newcity != '') {
-	$sql = 'INSERT INTO cities (name, added, addedby) VALUES ' .
+	$sql_query = 'INSERT INTO cities (name, added, addedby) VALUES ' .
 		   '("' . $newcity . '", "' . $added . '", "' . $userid  . '")';
 //	print ('<BR><BR>' . $sql . '<BR><BR>');
-	$result = mysql_query($sql);
-	$cityid = mysql_insert_id();
+	$result = mysqli_query($sql, $sql_query);
+	$cityid = mysqli_insert_id($sql);
 	}
 	
 	
@@ -98,7 +98,7 @@ if ($newposterfile != '') {
 	$newfilename = str_replace($toreplace, '_', $newfilename);
 
 	// ZMIANA POLSKICH LITEREK!
-	$toreplace = array('±', 'æ', 'ê', '³', 'ñ', 'ó', '¶', '¼', '¿', '¦', '£', '¯');
+	$toreplace = array('ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½');
 	$replaceto = array('a', 'c', 'e', 'l', 'n', 'o', 's', 'z', 'z', 's', 'l', 'z');  
 	$newfilename = str_replace($toreplace, $replaceto, $newfilename);
 
@@ -127,15 +127,15 @@ else {
 
 	
 	
-$sql = 'INSERT INTO concerts (title, urlname, description, date, cityid, addedby, start, cost, website, place, poster, added) VALUES ' .
+$sql_query = 'INSERT INTO concerts (title, urlname, description, date, cityid, addedby, start, cost, website, place, poster, added) VALUES ' .
        '("' . $title . '", "' . changename($title, $date) . '", "' . $description . '", "' . $date . '", "' . $cityid . '", "' . $userid . '", "' . $start . '", "' . $cost . '", "' . $website . '", "' . $place . '", "' . $poster . '", "' . $data_dodania . '")';
 
-if (mysql_query($sql)) {
+if (mysqli_query($sql, $sql_query)) {
     print ("<BR><BR><B>Koncert zostal dodany!</B><br><br>");	
 	
-	$concertid = mysql_insert_id();
+	$concertid = mysqli_insert_id($sql_query);
 } else {
-    print ("<P>Nie dodano koncertu bo:  ' (" . mysql_error() . ")<br>");
+    print ("<P>Nie dodano koncertu bo:  ' (" . mysqli_error($sql) . ")<br>");
     }
 
 	
@@ -143,9 +143,9 @@ $artistsarray = explode(',', $artists);
 
 foreach ($artistsarray as $artist) 
 	if ($artist!= '') {
-		$sql = 'INSERT INTO artist_concert_lookup (artistid, concertid) ' .
+		$sql_query = 'INSERT INTO artist_concert_lookup (artistid, concertid) ' .
 			   'VALUES ("' . $artist . '", "' . $concertid . '")';
-		$resutl = mysql_query($sql);
+		$resutl = mysqli_query($sql, $sql_query);
 		}	
 	
 include('template_bottom.php');	  

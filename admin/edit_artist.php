@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 include ('functions.php');
 include ('template_top.php');
 include ('connect_to_database.php');	
-include ('include/database-functions.php');  
+include ('database-functions.php');  
   
 
 function nl2p($text) {
@@ -24,7 +24,7 @@ function nl2p($text) {
    "nameid=$_POST[nameid]&altname1=$_POST[altname1]&altname2=$_POST[altname2]&altname3=$_POST[altname3]" .
    "\">Popraw</a>");
    }
-$profil = nl2p(mysql_escape_string($_POST['profil']));
+$profil = nl2p(mysqli_escape_string($sql, $_POST['profil']));
 
 // die($_POST['profil']);
 
@@ -89,17 +89,17 @@ if ((!$name) OR ($newid)) {
   print ("Imie i nazwisko: $_POST[realname]<BR>");
   
       
-  $sql = "UPDATE artists SET website='$_POST[website]', name='$_POST[name]', realname='$_POST[realname]', since='$_POST[date]', " .
+  $sql_query = "UPDATE artists SET website='$_POST[website]', name='$_POST[name]', realname='$_POST[realname]', since='$_POST[date]', " .
          "till='$_POST[till]', type='$_POST[nametype]', updated='$data_dodania', updatedby='$_SESSION[userid]', profile='$profil', concertinfo='$concertinfo' " .
 		 "WHERE id=$_POST[id]";
 		 
 		 
 
-      if (mysql_query($sql)) {
+      if (mysqli_query($sql, $sql_query)) {
 	    $nameid = $_POST['id'];
         print ("<BR><BR><B>Wykonawca '$_POST[name]' zostal aktualizowany, id: $nameid </B><br><br>");		
       } else {
-        echo("<P>Nie aktualizowano wykonawcy '$_POST[name]' (" . mysql_error() . ")<br>");
+        echo("<P>Nie aktualizowano wykonawcy '$_POST[name]' (" . mysqli_error($sql) . ")<br>");
       }
 
 	  
@@ -107,49 +107,49 @@ if ((!$name) OR ($newid)) {
 	
 	  
 // kasowanie wszystkich ksywek
-  $sql = "DELETE FROM altnames_lookup WHERE artistid=$_POST[id]";
-  mysql_query($sql);	
+  $sql_query = "DELETE FROM altnames_lookup WHERE artistid=$_POST[id]";
+  mysqli_query($sql, $sql_query);	
 	
     
   // dodanie pierwszego nicku
   if ($_POST['altname1'] != "") {
-    $sql = "INSERT INTO altnames_lookup (artistid, altname) " .
+    $sql_query = "INSERT INTO altnames_lookup (artistid, altname) " .
       "VALUES ('$nameid', '$_POST[altname1]')";
 	
-	if (mysql_query($sql)) {
-	  $insertid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $insertid = mysqli_insert_id($sql);
       print ("Dodano ksywe '$_POST[altname1]' dla wykonawcy: " . GetArtistName($nameid) . "<br>");		
       }
 	else {
-      echo("<P>Nie dodano ksywy '$_POST[altname1]' (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano ksywy '$_POST[altname1]' (" . mysqli_error($sql) . ")<br>");
 	  }
 	}
 
   // dodanie drugiego nicku
   if ($_POST['altname2'] != "") {
-    $sql = "INSERT INTO altnames_lookup (artistid, altname) " .
+    $sql_query = "INSERT INTO altnames_lookup (artistid, altname) " .
       "VALUES ('$nameid', '$_POST[altname2]')";
 	
-	if (mysql_query($sql)) {
-	  $insertid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $insertid = mysqli_insert_id($sql);
       print ("Dodano ksywe '$_POST[altname2]' dla wykonawcy: " . GetArtistName($nameid) . "<br>");		
       }
 	else {
-      echo("<P>Nie dodano ksywy '$_POST[altname2]' (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano ksywy '$_POST[altname2]' (" . mysqli_error($sql) . ")<br>");
 	  }
 	}  	
 	
   // dodanie trzeciego nicku
   if ($_POST['altname3'] != "") {
-    $sql = "INSERT INTO altnames_lookup (artistid, altname) " .
+    $sql_query = "INSERT INTO altnames_lookup (artistid, altname) " .
       "VALUES ('$nameid', '$_POST[altname3]')";
 	
-	if (mysql_query($sql)) {
-	  $insertid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $insertid = mysqli_insert_id($sql);
       print ("Dodano ksywe '$_POST[altname3]' dla wykonawcy: " . GetArtistName($nameid) . "<br>");		
       }
 	else {
-      echo("<P>Nie dodano ksywy '$_POST[altname3]' (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano ksywy '$_POST[altname3]' (" . mysqli_error($sql) . ")<br>");
 	  }
 	}  	
 
@@ -158,36 +158,36 @@ if ((!$name) OR ($newid)) {
 // dodawanie nowego miasta do bazy miast
 // *****************
   if ($cityid == -1) {
-    $sql = "INSERT INTO cities (name, added, addedby) " .
+    $sql_query = "INSERT INTO cities (name, added, addedby) " .
       "VALUES ('$_POST[city]', '$data_dodania', '" . $_SESSION['userid'] . "')";
 	
-	if (mysql_query($sql)) {
-	  $cityid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $cityid = mysqli_insert_id($sql);
       print ("Dodano miasto '$_POST[city]' do bazy miast!<br>");		
       }
 	else {
-      echo("<P>Nie dodano miasta: '$_POST[city]'! (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano miasta: '$_POST[city]'! (" . mysqli_error($sql) . ")<br>");
 	  }
 	}
 	
 // WYKASOWANIE DOTYCHCZASOWYCH POWIAZAN WYKONAWCOW I MIAST
-$sql = 'DELETE FROM artist_city_lookup WHERE (artistid=' . $_POST['id'] . ')';
-$result = mysql_query($sql);
+$sql_query = 'DELETE FROM artist_city_lookup WHERE (artistid=' . $_POST['id'] . ')';
+$result = mysqli_query($sql, $sql_query);
 	
 
 // kasowanie miast z powiazan z wykonawca
-  $sql = "DELETE FROM artist_city_lookup WHERE artistid=$_POST[id]";
-  mysql_query($sql);
+  $sql_query = "DELETE FROM artist_city_lookup WHERE artistid=$_POST[id]";
+  mysqli_query($sql, $sql_query);
 
   if ($cityid != '') {
-    $sql = "INSERT INTO city_artist_lookup (cityid, artistid) " .
+    $sql_query = "INSERT INTO city_artist_lookup (cityid, artistid) " .
       "VALUES ('$cityid', '$nameid')";
 	
-	if (mysql_query($sql)) {
+	if (mysqli_query($sql, $sql_query)) {
       print ('Dodano miasto \'' . GetCityName($cityid) . '\' dla wykonawcy: ' . GetArtistName($nameid) . '<br>');		
       }
 	else {
-      echo("<P>Nie dodano miasta $cityid (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano miasta $cityid (" . mysqli_error($sql) . ")<br>");
 	  }
 	}  		
  

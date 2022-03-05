@@ -46,13 +46,13 @@ include ('connect_to_database.php');
                 <?php
 	
 
-	$result = mysql_query("SELECT id, title FROM albums ORDER BY title");
+	$result = mysqli_query($sql, "SELECT id, title FROM albums ORDER BY title");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['albumid'] == $row["id"] ? 'selected' : '') . ">" . $row["title"] . "</option>");
   	  }
@@ -70,13 +70,13 @@ include ('connect_to_database.php');
 	
 
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['artistid'] == $row["id"] ? 'selected' : '') . ">" . $row["name"] . "</option>");
   	  }
@@ -93,13 +93,13 @@ include ('connect_to_database.php');
 	
 
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['artistid2'] == $row["id"] ? 'selected' : '') . ">" . $row["name"] . "</option>");
   	  }
@@ -116,13 +116,13 @@ include ('connect_to_database.php');
 	
 
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['artistid3'] == $row["id"] ? 'selected' : '') . ">" . $row["name"] . "</option>");
   	  }
@@ -138,13 +138,13 @@ include ('connect_to_database.php');
 	
 
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['artistid3'] == $row["id"] ? 'selected' : '') . ">" . $row["name"] . "</option>");
   	  }
@@ -161,13 +161,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feat1id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -183,13 +183,13 @@ include ('connect_to_database.php');
 	
 
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feat2id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -204,13 +204,13 @@ include ('connect_to_database.php');
                 <?php
 	
 
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feat3id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -224,13 +224,13 @@ include ('connect_to_database.php');
                 <option> </option>
                 <?php
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\""  . ($_GET['feat4id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -247,13 +247,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, feattype FROM feattypes ORDER BY feattype");
+	$result = mysqli_query($sql, "SELECT id, feattype FROM feattypes ORDER BY feattype");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feattype1id'] == $row["id"] ? 'selected' : ''). ">" . $row["feattype"] . "</option>");
   	  }
@@ -268,13 +268,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, feattype FROM feattypes ORDER BY feattype");
+	$result = mysqli_query($sql, "SELECT id, feattype FROM feattypes ORDER BY feattype");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feattype2id'] == $row["id"] ? 'selected' : ''). ">" . $row["feattype"] . "</option>");
   	  }
@@ -290,13 +290,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, feattype FROM feattypes ORDER BY feattype");
+	$result = mysqli_query($sql, "SELECT id, feattype FROM feattypes ORDER BY feattype");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feattype3id'] == $row["id"] ? 'selected' : ''). ">" . $row["feattype"] . "</option>");
   	  }
@@ -311,13 +311,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, feattype FROM feattypes ORDER BY feattype");
+	$result = mysqli_query($sql, "SELECT id, feattype FROM feattypes ORDER BY feattype");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['feattype4id'] == $row["id"] ? 'selected' : ''). ">" . $row["feattype"] . "</option>");
   	  }
@@ -334,13 +334,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['music1id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -355,13 +355,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['music2id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -376,13 +376,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['scratch1id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -397,13 +397,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['scratch2id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -420,13 +420,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, name FROM artists ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM artists ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\"" . ($_GET['remix1id'] == $row["id"] ? 'selected' : ''). ">" . $row["name"] . "</option>");
   	  }
@@ -462,13 +462,13 @@ include ('connect_to_database.php');
                 <?php
 	
 	
-	$result = mysql_query("SELECT id, title FROM songs ORDER BY title");
+	$result = mysqli_query($sql, "SELECT id, title FROM songs ORDER BY title");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error($sql) . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row["id"] . "\">" . $row["title"] . "</option>");
   	  }

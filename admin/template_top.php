@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Panel administracyjny</title>
-<link rel="stylesheet" href="hhbd.css">
+<link rel="stylesheet" href="css/hhbd.css">
 <link rel="stylesheet" href="css/s.css">
 </style></head>
 

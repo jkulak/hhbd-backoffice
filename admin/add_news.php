@@ -55,7 +55,7 @@ $filename = $_FILES['graph']['tmp_name'];
 $newfilename = strtolower(substr($added, 0, 10) . '-' . substr($title, 0, 10) . '-' . substr($news, 0, 20));
 $toreplace = array(' ', '?', ':', '*', '|', '/', '\\', '"', '<', '>', '\'', '.', ',') ;
 $newfilename = str_replace($toreplace, '_', $newfilename);
-$toreplace = array('±', 'æ', 'ê', '³', 'ñ', 'ó', '¶', '¼', '¿', '¦', '£', '¯');
+$toreplace = array('ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½');
 $replaceto = array('a', 'c', 'e', 'l', 'n', 'o', 's', 'z', 'z', 's', 'l', 'z');  
 $newfilename = str_replace($toreplace, $replaceto, $newfilename);
 
@@ -78,13 +78,13 @@ print ('<B>NEWS:</B>&nbsp;' . nl2br($news) . '<BR><BR>');
 print ('<B>EXPIRES:</B>&nbsp;' . $expires . '<BR><BR>');
 print ('<B>ADDEDBYID:</B>&nbsp;' . $userid . '<BR><BR>');
 
-$sql = 'INSERT INTO news (title, news, expires, addedby, added, glyph, graph) VALUES ' .
+$sql_query = 'INSERT INTO news (title, news, expires, addedby, added, glyph, graph) VALUES ' .
        '("' . $title . '", "' . $news . '", "' . $expires . '", "' . $userid . '", "' . $added . '", "' . $glyph . '", "' . $newfilename . '")';
 
-$result = mysql_query($sql);
+$result = mysqli_query($sql, $sql_query);
 if ($result) {
     print ("<BR><BR><B>News zostal dodany!</B><br><br>");	
-	$newsid = mysql_insert_id();
+	$newsid = mysqli_insert_id($sql);
 	//upload grafiki
 	if (move_uploaded_file($filename,$newname)) {
 		print ('skopiowano plik na serwer!<BR><BR><BR>');
@@ -104,9 +104,9 @@ if ($result) {
 $concertsarray = explode(',', $concerts);
 foreach ($concertsarray as $concert) 
 	if ($concert!= '') {
-		$sql = 'INSERT INTO news_concert_lookup (concertid, newsid) ' .
+		$sql_query = 'INSERT INTO news_concert_lookup (concertid, newsid) ' .
 			   'VALUES ("' . $concert . '", "' . $newsid . '")';
-		$resutl = mysql_query($sql);
+		$resutl = mysqli_query($sql, $sql_query);
 		}	
 		
 		
@@ -114,38 +114,38 @@ foreach ($concertsarray as $concert)
 $artistsarray = explode(',', $artists);
 foreach ($artistsarray as $artist) 
 	if ($artist!= '') {
-		$sql = 'INSERT INTO news_artist_lookup (artistid, newsid) ' .
+		$sql_query = 'INSERT INTO news_artist_lookup (artistid, newsid) ' .
 			   'VALUES ("' . $artist . '", "' . $newsid . '")';
-		$resutl = mysql_query($sql);
+		$resutl = mysqli_query($sql, $sql_query);
 		}
 		
 $labelsarray = explode(',', $labels);
 foreach ($labelsarray as $label) 
 	if ($label != '') {
-		$sql = 'INSERT INTO news_label_lookup (labelid, newsid) ' .
+		$sql_query = 'INSERT INTO news_label_lookup (labelid, newsid) ' .
 			   'VALUES ("' . $label . '", "' . $newsid . '")';
-		$resutl = mysql_query($sql);
+		$resutl = mysqli_query($sql, $sql_query);
 		}		
 		
 $albumsarray = explode(',', $albums);
 foreach ($albumsarray as $album) 
 	if ($album!= '') {
-		$sql = 'INSERT INTO news_album_lookup (albumid, newsid) ' .
+		$sql_query = 'INSERT INTO news_album_lookup (albumid, newsid) ' .
 			   'VALUES ("' . $album . '", "' . $newsid . '")';
-		$resutl = mysql_query($sql);
+		$resutl = mysqli_query($sql, $sql_query);
 		}			
 		
 $citiesarray = explode(',', $cities);
 foreach ($citiesarray as $city) 
 	if ($city!= '') {
-		$sql = 'INSERT INTO news_city_lookup (cityid, newsid) ' .
+		$sql_query = 'INSERT INTO news_city_lookup (cityid, newsid) ' .
 			   'VALUES ("' . $city . '", "' . $newsid . '")';
-		$resutl = mysql_query($sql);
+		$resutl = mysqli_query($sql, $sql_query);
 		}	
 	
 		
 } else {
-    print ("<P>Nie dodano newsa bo:  ' (" . mysql_error() . ")<br>");
+    print ("<P>Nie dodano newsa bo:  ' (" . mysqli_error($sql) . ")<br>");
     }
 
 

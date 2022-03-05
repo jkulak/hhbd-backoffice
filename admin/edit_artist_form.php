@@ -9,18 +9,18 @@ if (!isset($_SESSION['username'])) {
 include ('template_top.php');
 include ('connect_to_database.php');
 
-$sql = 'SELECT name, realname, since, till, type, profile, website, concertinfo FROM artists WHERE id=' . $_GET['id'];
-$result = mysql_query($sql);  
-$artistrow = mysql_fetch_array($result);
+$sql_query = 'SELECT name, realname, since, till, type, profile, website, concertinfo FROM artists WHERE id=' . $_GET['id'];
+$result = mysqli_query($sql, $sql_query);  
+$artistrow = mysqli_fetch_array($result);
 
 
-$sql = 'SELECT cityid FROM artist_city_lookup WHERE artistid=' . $_GET['id'];
-$result = mysql_query($sql);
-$cityrow = mysql_fetch_array($result);
+$sql_query = 'SELECT cityid FROM artist_city_lookup WHERE artistid=' . $_GET['id'];
+$result = mysqli_query($sql, $sql_query);
+$cityrow = mysqli_fetch_array($result);
 
-$sql = 'SELECT altname FROM altnames_lookup WHERE artistid=' . $_GET['id'];
-$result = mysql_query($sql);
-while( $temprow = mysql_fetch_array($result) ){
+$sql_query = 'SELECT altname FROM altnames_lookup WHERE artistid=' . $_GET['id'];
+$result = mysqli_query($sql, $sql_query);
+while( $temprow = mysqli_fetch_array($result) ){
   $altname[] = $temprow['altname'];
   } // while
 
@@ -63,13 +63,13 @@ while( $temprow = mysql_fetch_array($result) ){
               <select name="cityid">
                 <option> </option>
                 <?php	
-	$result = mysql_query("SELECT id, name FROM cities ORDER BY name");
+	$result = mysqli_query($sql, "SELECT id, name FROM cities ORDER BY name");
     if (!$result) {
-      echo("<P>Error performing query: " . mysql_error() . "</P>");
+      echo("<P>Error performing query: " . mysqli_error() . "</P>");
 	  exit();
   	  }
 	    
-    while ( $row = mysql_fetch_array($result) ) {
+    while ( $row = mysqli_fetch_array($result) ) {
  
 	  print ("<option value=\"" . $row['id'] . "\"" . ($cityrow['cityid'] == $row['id'] ? 'selected' : '') . ">" . $row["name"] . "</option>");
   	  }

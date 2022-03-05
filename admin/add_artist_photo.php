@@ -37,14 +37,14 @@ if ($id == '') {
 
 $artist_photo = $_FILES['artist_photo']['tmp_name'];
 
-$sql = 'SELECT count(id) FROM artists_photos WHERE artistid=' . $id;
-$result = mysql_query($sql);
-$numphotos = mysql_fetch_array($result);
+$sql_query = 'SELECT count(id) FROM artists_photos WHERE artistid=' . $id;
+$result = mysqli_query($sql, $sql_query);
+$numphotos = mysqli_fetch_array($result);
 print ('w bazie jest juz ' . $numphotos[0] . ' zdjec tego wykonawcy.<BR><BR>');
 
-$sql = 'SELECT name FROM artists WHERE id=' . $id;
-$result = mysql_query($sql);
-$artistname = mysql_fetch_array($result);
+$sql_query = 'SELECT name FROM artists WHERE id=' . $id;
+$result = mysqli_query($sql, $sql_query);
+$artistname = mysqli_fetch_array($result);
 
 $numphotos = $numphotos[0];
 $numphotos++;
@@ -58,16 +58,16 @@ $newphoto = $newfilename . '-hhbdpl.jpg';
 $newname = $path . $newphoto;
 
 if ($setmain) {
-    $sql = 'UPDATE artists_photos SET main="n" WHERE (main="y" AND artistid="' . $id . '")';
-    $result = mysql_query($sql);
+    $sql_query = 'UPDATE artists_photos SET main="n" WHERE (main="y" AND artistid="' . $id . '")';
+    $result = mysqli_query($sql, $sql_query);
 }
 
 // DODANIE ZDJECIA DO BAZY
-$sql = 'INSERT INTO artists_photos (artistid, main, filename, description, source, sourceurl, addedby) ' .
+$sql_query = 'INSERT INTO artists_photos (artistid, main, filename, description, source, sourceurl, addedby) ' .
        'VALUES (' . $id . ', "' . $setmain . '", "' . $newphoto . '", "' . $_POST['description'] . '", "' . $_POST['source'] .
        '", "' . $_POST['sourceurl'] . '", ' . $_SESSION['userid'] . ')';
 
-if ($result = mysql_query($sql)) {
+if ($result = mysqli_query($sql, $sql_query)) {
     print ('<B>Zdjecie zostalo dodane do bazy...</b><BR>');
     if (move_uploaded_file($artist_photo,$newname)) {
         print ('skopiowano plik na serwer!<BR><BR><BR>');
@@ -77,7 +77,7 @@ if ($result = mysql_query($sql)) {
         print ('Nie skopiowano pliku tam gdzie trzeba...<BR><BR>');
         }
     } else {
-        print ('Nie dodano zdjecia: (' . mysql_error() . ')<br>');
+        print ('Nie dodano zdjecia: (' . mysqli_error($sql) . ')<br>');
     }
 
  include('template_bottom.php');

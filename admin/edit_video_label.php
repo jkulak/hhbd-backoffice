@@ -17,7 +17,7 @@ include ('connect_to_database.php');
  
   //sprawdzanie poprawnosci danych
   if ($_GET[name] == "") {
-    print ("<b>Brak nazwy wytwórni video!</b><br>");
+    print ("<b>Brak nazwy wytwï¿½rni video!</b><br>");
 	goback();
     include('template_bottom.php');
 	exit();
@@ -44,51 +44,51 @@ $cityid = $_GET['cityid'];
   
   //jezeli tutaj doszlimy, to znaczy ze wszystkie dane w porzadku
 
-  print ("Wytwórnia: $_GET[name]<BR>");
+  print ("Wytwï¿½rnia: $_GET[name]<BR>");
   print ("Website: $_GET[website]<BR>");
   
-  $sql = "INSERT INTO video_labels (name, website, email, addres, added, addedby) " .
+  $sql_query = "INSERT INTO video_labels (name, website, email, addres, added, addedby) " .
 	"VALUES ('$_GET[name]', '$_GET[website]', '$_GET[email]', '$_GET[addres]', '$data_dodania', '$_GET[addedby]')";
 			 
-      if (mysql_query($sql)) {
-	    $insertID = mysql_insert_id();
-        print ("<BR><BR><B>Wytwórnia '$_GET[name]' zostala dodana, ID: $insertID </B><br><br>");		
+      if (mysqli_query($sql, $sql_query)) {
+	    $insertID = mysqli_insert_id($sql);
+        print ("<BR><BR><B>Wytwï¿½rnia '$_GET[name]' zostala dodana, ID: $insertID </B><br><br>");		
       } else {
-        echo("<P>Nie dodano wytwórni '$_GET[name]' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano wytwï¿½rni '$_GET[name]' (" . mysqli_error($sql) . ")<br>");
       }
 	  
 // *****************
 // dodawanie nowego miasta do bazy miast
 // *****************
   if ($cityid == -1) {
-    $sql = "INSERT INTO cities (name, added, addedby) " .
+    $sql_query = "INSERT INTO cities (name, added, addedby) " .
       "VALUES ('$_GET[city]', '$data_dodania', '" . $_SESSION['userid'] . "')";
 	
-	if (mysql_query($sql)) {
-	  $cityinsertid = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $cityinsertid = mysqli_insert_id($sql);
       print ("Dodano miasto '$_GET[city]' do bazy miast!<br>");		
       }
 	else {
-      echo("<P>Nie dodano miasta: '$_GET[city]'! (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano miasta: '$_GET[city]'! (" . mysqli_error($sql) . ")<br>");
 	  }
 	}
 	
 	
   if ($cityinsertid != 0) {
-    $sql = "INSERT INTO city_video_label_lookup (cityid, videolabelid) " .
+    $sql_query = "INSERT INTO city_video_label_lookup (cityid, videolabelid) " .
       "VALUES ('$cityinsertid', '$nameid')";
 	
-	if (mysql_query($sql)) {
-	  $insertID = mysql_insert_id();
+	if (mysqli_query($sql, $sql_query)) {
+	  $insertID = mysqli_insert_id($sql);
       print ("Dodano miasto $cityinsertid dla wytworni video: " . GetArtistName($nameid) . "<br>");		
       }
 	else {
-      echo("<P>Nie dodano miasta $cityinsertid (" . mysql_error() . ")<br>");
+      echo("<P>Nie dodano miasta $cityinsertid (" . mysqli_error($sql) . ")<br>");
 	  }
 	} 	  
 	
 		  
-  print ("<a href=\"add_video_label_form.php?addedby=$_GET[addedby]\">Dodaj nastêpn¹ wytwórniê VIDEO.</a><br>");
+  print ("<a href=\"add_video_label_form.php?addedby=$_GET[addedby]\">Dodaj nastï¿½pnï¿½ wytwï¿½rniï¿½ VIDEO.</a><br>");
   
   include('template_bottom.php');	  
 ?>

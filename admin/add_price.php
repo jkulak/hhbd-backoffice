@@ -22,15 +22,15 @@ $addedby = $_SESSION['userid'];
 //print ('dodany: ' . $added . '<BR>');
 //print ('dodany przez: ' . $addedby . '<BR>');
 	
-$sql = 'INSERT INTO album_prices (albumid, shopid, link, added, addedby) ' .
+$sql_query = 'INSERT INTO album_prices (albumid, shopid, link, added, addedby) ' .
 		'VALUES ("' . $albumid . '", "' . $shopid . '", "' . $link . '", "' . $added . '", "' . $addedby . '")';
-if (mysql_query($sql)) {
+if (mysqli_query($sql, $sql_query)) {
 	 header('Location: add_price_form.php?msg=1&shopid=' . $shopid);
 	//print ("<BR><BR><B>Cena dodana!</B><br><br>");		
 	}
 else {
   include ('template_top.php');
-	echo("<P>Nie dodano ceny  bo:  ' (" . mysql_error() . ")<br>");
+	echo("<P>Nie dodano ceny  bo:  ' (" . mysqli_error($sql) . ")<br>");
 	}
 include('template_bottom.php');	  
 ?>

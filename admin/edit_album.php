@@ -120,51 +120,51 @@ if (!isset($_SESSION['username'])) {
   
   //jezeli tutaj doszlimy, to znaczy ze wszystkie dane w porzadku
   if (($artist1id == -1) && ($_POST[artist] != "")) {
-    $sql = "INSERT INTO artists (name, added, addedby) VALUES ('$_POST[artist]', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, added, addedby) VALUES ('$_POST[artist]', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowego wykonawcê: '$_POST[artist]'<BR><BR>");
-      $artist1id = mysql_insert_id();
+      $artist1id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_POST[artist]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_POST[artist]' (" . mysqli_error($sql) . ")<BR>");
 	  }
 	}
 	
   if (($artist2id == -1) && ($_POST[artist2] != "")) {
-    $sql = "INSERT INTO artists (name, added, addedby) VALUES ('$_POST[artist2]', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, added, addedby) VALUES ('$_POST[artist2]', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowego wykonawcê: '$_POST[artist2]'<BR><BR>");
-      $artist2id = mysql_insert_id();
+      $artist2id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_POST[artist2]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_POST[artist2]' (" . mysqli_error() . ")<BR>");
 	  }
 	}
 	
   if (($artist3id == -1) && ($_POST[artist3] != "")) {
-    $sql = "INSERT INTO artists (name, added, addedby) VALUES ('$_POST[artist3]', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO artists (name, added, addedby) VALUES ('$_POST[artist3]', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy nowego wykonawcê: '$_POST[artist3]'<BR><BR>");
-      $artist3id = mysql_insert_id();
+      $artist3id = mysqli_insert_id($sql);
       }
 	else {
-      print ("Nie dodano wykonawcy: '$_POST[artist3]' (" . mysql_error() . ")<BR>");
+      print ("Nie dodano wykonawcy: '$_POST[artist3]' (" . mysqli_error() . ")<BR>");
 	  }
 	}		
 	
 	
   if ($labelid == -1) {
-    $sql = "INSERT INTO labels (name, added, addedby) VALUES ('$_POST[label]', '$data_dodania', '" . $_SESSION['userid'] . "')";
-    $result = mysql_query($sql);
+    $sql_query = "INSERT INTO labels (name, added, addedby) VALUES ('$_POST[label]', '$data_dodania', '" . $_SESSION['userid'] . "')";
+    $result = mysqli_query($sql, $sql_query);
 	if ($result) {
 	  print ("Dodano do bazy now¹ wytwórniê: '$_POST[label]'<BR><BR>");
-	  $labelid = mysql_insert_id();
+	  $labelid = mysqli_insert_id($sql);
       }
 	else {
-	  print ("Nie dodano wytwórni: '$_POST[label]' (" . mysql_error() . ")<BR>");
+	  print ("Nie dodano wytwórni: '$_POST[label]' (" . mysqli_error() . ")<BR>");
 	  }
 	}	
 	
@@ -192,58 +192,58 @@ if (!isset($_SESSION['username'])) {
   	  print ('albumid: ' . $_POST[id] . '<br>');
 	  
   
-  $sql = "UPDATE albums SET title='$_POST[title]', urlname='" . create_urlname($_POST[title], 1, 1) . "', labelid='$labelid', year='$_POST[year]', media_mc=$mc, media_cd=$cd, " .
+  $sql_query = "UPDATE albums SET title='$_POST[title]', urlname='" . create_urlname($_POST[title], 1, 1) . "', labelid='$labelid', year='$_POST[year]', media_mc=$mc, media_cd=$cd, " .
 	"media_lp=$lp, singiel=$ep, updatedby=$_SESSION[userid], updated=$data_dodania, catalog_cd='$_POST[cdcatalog]', " .
 	"catalog_lp='$_POST[lpcatalog]', catalog_mc='$_POST[mccatalog]', epfor='$_POST[epforid]', description='$description' , premier='$premier'" .
 	"WHERE id=$_POST[id]";
 			 
-      if (mysql_query($sql)) {
+      if (mysqli_query($sql, $sql_query)) {
         print ("<BR><BR><B>Album '$_POST[title]' zostal update'owany, id: $_POST[id] </B><br><br>");		
       } else {
-        echo("<P>Nie update'owano albumu '$_POST[title]' (" . mysql_error() . ")<br>");
+        echo("<P>Nie update'owano albumu '$_POST[title]' (" . mysqli_error($sql) . ")<br>");
       }
 	  
 
 
 // kasowanie wszystkich powiazan
-  $sql = "DELETE FROM album_artist_lookup WHERE albumid=$_POST[id]";
-  mysql_query($sql);
+  $sql_query = "DELETE FROM album_artist_lookup WHERE albumid=$_POST[id]";
+  mysqli_query($sql, $sql_query);
   
   
   // dodanie powiazania album - artist 1
   if (($artist1id != -1) && ($artist1id != '')) {
-    $sql = "INSERT INTO album_artist_lookup (artistid, albumid) VALUES (" .
+    $sql_query = "INSERT INTO album_artist_lookup (artistid, albumid) VALUES (" .
           "'$artist1id', '$_POST[id]')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("Dodane powiazanie: artist1: $artist1id, albumid: $_POST[id]<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error() . ")<br>");
       }			  
 	}	
 	
   // dodanie powiazania album - artist 2
   if (($artist2id != -1) && ($artist2id != '')) {
-    $sql = "INSERT INTO album_artist_lookup (artistid, albumid) VALUES (" .
+    $sql_query = "INSERT INTO album_artist_lookup (artistid, albumid) VALUES (" .
           "'$artist2id', '$_POST[id]')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql, $sql_query)) {
         print ("<BR>Dodane powiazanie: artist2: $artist2id, albumid: $_POST[id]<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error() . ")<br>");
       }			  
 	}	
 	
   // dodanie powiazania album - artist 3
   if (($artist3id != -1) && ($artist3id != '')) {
-    $sql = "INSERT INTO album_artist_lookup (artistid, albumid) VALUES (" .
+    $sql_query = "INSERT INTO album_artist_lookup (artistid, albumid) VALUES (" .
           "'$artist3id', '$_POST[id]')";
-    if (mysql_query($sql)) {
+    if (mysqli_query($sql,$sql_query)) {
         print ("<BR>Dodane powiazanie: artist3: $artist3id, albumid: $_POST[id]<br>");		
       } else {
-        echo("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+        echo("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
       }			  
 	}			
 
-  print ("<a href=\"add_song_form.php?addedby=$_POST[addedby]&artist1id=$artist1id&artist2id=$artist2id&artist3id=$artist3id&track=1&albumid=" . mysql_insert_id() . "\">Dodaj piosenki</a><br>");
+  print ("<a href=\"add_song_form.php?addedby=$_POST[addedby]&artist1id=$artist1id&artist2id=$artist2id&artist3id=$artist3id&track=1&albumid=" . mysqli_insert_id($sql) . "\">Dodaj piosenki</a><br>");
   
   
   include('template_bottom.php');	  

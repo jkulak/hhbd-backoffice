@@ -24,13 +24,13 @@ print ('enabled: ' . $enable . '<BR>');
 print ('dodany: ' . $added . '<BR>');
 print ('dodany przez: ' . $addedby . '<BR>');
 	
-$sql = 'INSERT INTO eshops (name, website, display, added, addedby) ' .
+$sql_query = 'INSERT INTO eshops (name, website, display, added, addedby) ' .
 		'VALUES ("' . $name . '", "' . $website . '", "' . $enable . '", "' . $added . '", "' . $addedby . '")';
-if (mysql_query($sql)) {
+if (mysqli_query($sql, $sql_query)) {
 	print ("<BR><BR><B>Skle dodany!</B><br><br>");		
 	}
 else {
-	echo("<P>Nie dodano ceny  bo:  ' (" . mysql_error() . ")<br>");
+	echo("<P>Nie dodano ceny  bo:  ' (" . mysqli_error($sql) . ")<br>");
 	}
 include('template_bottom.php');	  
 ?>

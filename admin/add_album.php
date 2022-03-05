@@ -10,7 +10,7 @@ include 'include/functions.php';
 include 'template_top.php';
 include 'connect_to_database.php';
 include 'functions.php';
-include 'include/database-functions.php';
+include 'database-functions.php';
 
 function goback() {
 	print('<a href="add_album_form.php?artistid=' . $_POST['artistid'] . "&labelid=$_POST[labelid]&title=$_POST[title]&" .
@@ -91,35 +91,35 @@ print("Dodany do katalogu: $data_dodania<br>");
 $urlname = create_urlname($_POST['title'], 1, 1);
 $basename = $urlname;
 $inum = 1;
-$sql = 'SELECT title, urlname FROM albums WHERE urlname="' . $urlname . '"';
-$res = mysql_query($sql);
-while (mysql_num_rows($res)) {
+$sql_query = 'SELECT title, urlname FROM albums WHERE urlname="' . $urlname . '"';
+$res = mysqli_query($sql, $sql_query);
+while (mysqli_num_rows($res)) {
 	$inum++;
 	$urlname = $basename . '_' . $inum;
-	$sql = 'SELECT title, urlname FROM albums WHERE urlname="' . $urlname . '"';
-	$res = mysql_query($sql);
+	$sql_query = 'SELECT title, urlname FROM albums WHERE urlname="' . $urlname . '"';
+	$res = mysqli_query($sql, $sql_query);
 }
 
-$sql = "INSERT INTO albums (title, urlname, labelid, year, media_mc, catalog_mc, media_cd, catalog_cd, " .
+$sql_query = "INSERT INTO albums (title, urlname, labelid, year, media_mc, catalog_mc, media_cd, catalog_cd, " .
 "media_lp, catalog_lp, epfor, singiel, addedby, added, cover, description, premier) VALUES ( " .
 "'$_POST[title]', '$urlname', $labelid, '$_POST[date]', " .
 "'$mc', '$_POST[mccatalog]', '$cd', '$_POST[cdcatalog]', '$lp', '$_POST[lpcatalog]', '$_POST[epforid]', '$ep', '" . $_SESSION['userid'] . "', '$data_dodania', '$newname'" . ',"' . $description . '", "' . $_POST['premier'] . '")';
 
-if (mysql_query($sql)) {
-	$albumid = mysql_insert_id();
+if (mysqli_query($sql, $sql_query)) {
+	$albumid = mysqli_insert_id($sql);
 	print("<BR><BR><B>Album '$_POST[title]' zostal dodany, id: $albumid </B><br><br>");
 
 } else {
-	echo ("<P>Nie dodano albumu '$_POST[title]' (" . mysql_error() . ")<br>");
+	echo ("<P>Nie dodano albumu '$_POST[title]' (" . mysqli_error($sql) . ")<br>");
 }
 
 // dodanie powiazania album - artist 1
 if ($artistid) {
-	$sql = 'INSERT INTO album_artist_lookup (artistid, albumid) VALUES ("' . $artistid . '", "' . $albumid . '")';
-	if (mysql_query($sql)) {
+	$sql_query = 'INSERT INTO album_artist_lookup (artistid, albumid) VALUES ("' . $artistid . '", "' . $albumid . '")';
+	if (mysqli_query($sql, $sql_query)) {
 		print("Dodane powiazanie: artist: $artistid, albumid: $albumid<br>");
 	} else {
-		echo ("<P>Nie dodano powiazania!' (" . mysql_error() . ")<br>");
+		echo ("<P>Nie dodano powiazania!' (" . mysqli_error($sql) . ")<br>");
 	}
 }
 
