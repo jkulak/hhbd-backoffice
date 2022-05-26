@@ -9,10 +9,10 @@ if(($_POST['login'] == "") OR ($_POST['password']) == "") {
   exit;
   }  
   
-$sql_query = 'SELECT id, name, added, timesloggedin, lastlogin, conc_priv, news_priv, week_priv, lala_priv FROM users_admins WHERE (login="' . $_POST['login'] . '" AND pass="' . md5($_POST['password']) . '")';
-$result = mysqli_query($sql, $sql_query);
-$row = mysqli_fetch_array($result);
-$num = mysqli_num_rows($result);
+$sql = 'SELECT id, name, added, timesloggedin, lastlogin, conc_priv, news_priv, week_priv, lala_priv FROM users_admins WHERE (login="' . $_POST['login'] . '" AND pass="' . md5($_POST['password']) . '")';
+$result = mysql_query($sql);
+$row = mysql_fetch_array($result);
+$num = mysql_num_rows($result); 
 
 if($num == 1) { 
 	$_SESSION['adminusername'] = $_POST['login'];
@@ -22,8 +22,8 @@ if($num == 1) {
 	$_SESSION['week_priv'] = $row['week_priv'];
 	$_SESSION['lala_priv'] = $row['lala_priv'];
   
-	$sql_query = 'UPDATE users SET lastlogin="' . date('YmdHis') . '", timesloggedin=(timesloggedin+1) WHERE id="' . $row['id'] . '"';
-	$result = mysqli_query($sql, $sql_query);    
+	$sql = 'UPDATE users SET lastlogin="' . date('YmdHis') . '", timesloggedin=(timesloggedin+1) WHERE id="' . $row['id'] . '"';
+	$result = mysql_query($sql);    
 	header("Location: admin.php?s=glowna");  
 	exit();  
 	} 

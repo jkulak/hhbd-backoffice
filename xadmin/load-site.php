@@ -21,7 +21,7 @@ $s_arr = array(
 if (($s == '')) {
     $s = 'login';
 }
-echo $s_arr;
+
 // if $s jest ktoryms ktorych trzeba szukac to search
 // else podstawiamy stalego HTML
 // a co z lista albumow, bo z TOP 10

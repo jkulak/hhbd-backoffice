@@ -2,17 +2,18 @@
 
 // Read configuration file
 $config = parse_ini_file('config/app.ini');
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$sql = mysqli_connect($config['host'], $config['user'], $config['pass'], $config['database'], $config['port']);
+
+// Connect to the database server
+$sql = mysql_connect($config['host'] . (isset($config['port'])?':'.$config['port']:''), $config['user'], $config['pass']);
     if (!$sql) {
-        print ("Nie mozna sie polaczyc z baza: " . mysqli_error() . "<br>");
+        print ("Nie mozna sie polaczyc z baza: " . mysql_error() . "<br>");
         exit();
     }
-mysqli_set_charset($sql, 'utf8');
+
+mysql_set_charset('utf8');
 $db_name = $config['database'];
 
-if (!mysqli_select_db($sql, $db_name) ) {
-    print ("Nie mozna odnalezc bazy: $db_name (" . mysqli_error($sql) . ")<br>");
+if (!mysql_select_db($db_name) ) {
+    print ("Nie mozna odnalezc bazy: $db_name (" . mysql_error() . ")<br>");
     exit();
 }
- 

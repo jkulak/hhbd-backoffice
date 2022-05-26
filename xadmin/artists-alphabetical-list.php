@@ -27,11 +27,11 @@ include ('include/connect-to-database.php');
 //mysql_select_db('sql_hhbd_katalog');
  
  
-$sql_query = 'SELECT id, name AS n FROM artists ORDER BY name';
-$result = mysqli_query($sql, $sql_query);
+$sql = 'SELECT id, name AS n FROM artists ORDER BY name';
+$result = mysql_query($sql);
 
 print ('<strong>LISTA WYKONAWCOW:</strong><ul class="smallindent" style="list-style-type: none;">');
-while ($row = mysqli_fetch_array($result)) {
+while ($row = mysql_fetch_array($result)) {
 	print ('<a href="#" onClick="a(\'' . $row['id'] . '\', \'' . $id . '\')"><li>' . $row['n'] . '</li>');
 	}
 print ('</ul>');

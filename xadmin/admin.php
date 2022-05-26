@@ -12,6 +12,7 @@ include ('include/functions.php');
 
 // USTAWIENIA
 $fileprefix = 'www_hhbd_pl_polski_hip_hop_';
+
 $s = $_GET['s'];
 
 $smarty->assign('news_priv', $_SESSION['news_priv']);
