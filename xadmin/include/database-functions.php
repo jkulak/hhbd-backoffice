@@ -8,14 +8,16 @@
  **/
  
 include ('include/urlname-functions.php');
+include ('connect_to_database.php'); 
+
 
 // **************************************************************************************************
-// * FUNKCJE POBIERAJ¥CE Z BAZY                                                                     *
+// * FUNKCJE POBIERAJï¿½CE Z BAZY                                                                     *
 // **************************************************************************************************
 function get_artist_id($name){
 	$sql = 'SELECT id FROM artists WHERE name="' . $name . '"';
-	$result = @mysql_query($sql);
-	$row = @mysql_fetch_array($result);
+	$result = @mysqli_query($sql);
+	$row = @mysqli_fetch_array($result);
 	$id = $row['id'];
 	if (!isset($id)) $id = 0;
 	return $id;
@@ -23,16 +25,16 @@ function get_artist_id($name){
 
 function get_artist_name($artistid){
 	$sql = 'SELECT name FROM artists WHERE id="' . $artistid . '"';
-	$result = @mysql_query($sql);
-	$row = @mysql_fetch_array($result);
+	$result = @mysqli_query($sql);
+	$row = @mysqli_fetch_array($result);
 	$name = $row['name'];
 	return $name;
 	}
 	
 function get_label_name($labelid){
 	$sql = 'SELECT name FROM labels WHERE id="' . $labelid . '"';
-	$result = @mysql_query($sql);
-	$row = @mysql_fetch_array($result);
+	$result = @mysqli_query($sql);
+	$row = @mysqli_fetch_array($result);
 	$name = $row['name'];
 	return $name;
 	}
@@ -40,7 +42,7 @@ function get_label_name($labelid){
 
 	
 // **************************************************************************************************
-// * FUNKCJE DODAJ¥CE DO BAZY                                                                       *
+// * FUNKCJE DODAJï¿½CE DO BAZY                                                                       *
 // **************************************************************************************************
  
 function add_artist($name, $addedby) {
@@ -49,16 +51,16 @@ function add_artist($name, $addedby) {
 	$inum = 1;		
 
 	$sql = 'SELECT name FROM artists WHERE urlname="' . $urlname . '"';
-	$res = mysql_query($sql);	
-	while (mysql_num_rows($res)) {		
+	$res = mysqli_query($sql);	
+	while (mysqli_num_rows($res)) {		
 		$inum++;
 		$urlname = $basename . '_' . $inum;		
 		$sql = 'SELECT name FROM artists WHERE urlname="' . $urlname . '"';
-		$res = mysql_query($sql);
+		$res = mysqli_query($sql);
 		}
 	$sql = 'INSERT INTO artists (name, urlname, added, addedby) VALUES ("' . $name . '", "' . $urlname . '", "' . date('YmdHis') . '", "' . $addedby . '")';
-    $result = mysql_query($sql);
-	$return = mysql_insert_id();
+    $result = mysqli_query($sql);
+	$return = mysqli_insert_id();
 	return($return);
 	}		
 	
